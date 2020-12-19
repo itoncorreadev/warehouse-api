@@ -1,0 +1,25 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=lbv01rrio1950
+      - POSTGRES_USER=postgreslbv
+    ports:
+      - '5432:5432'
+  application:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - RAILS_ENV=development
+        - NODE_ENV=development
+    ports:
+      - '3000:3000'
+      - '3009:3009'
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
