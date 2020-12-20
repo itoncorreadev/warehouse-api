@@ -4,7 +4,7 @@ RSpec.describe 'Users API', type: :request do
   let!(:user) { create(:user) }
   let(:user_id) { user.id }
 
-  before { host! 'api.warehouse.test'  }
+  before { host! 'api.warehouse.test' }
 
   describe 'GET /users/:id' do
 
@@ -32,4 +32,37 @@ RSpec.describe 'Users API', type: :request do
     end
     
   end  
+
+  describe 'POST /users' do
+    before do
+      headers = { 'Accept' => 'application/vnd.warehouse.v1' }
+      post '/users', params: { user: user_params }, headers: headers
+    end
+
+    context 'when the request params are valid' do
+      let(:user_params) { attributes_for(:user) }
+
+      it 'return status code 201' do
+        expect(response).to have_http_status(201)
+      end
+
+      it 'retuns json data for the created user' do
+        user_response = JSON.parse(response.body)
+        expect(user_response['email']).to eq(user_params[:email])
+      end
+    end
+
+    context 'when the request params are invalid' do
+      let(:user_params) { attributes_for(:user, email: 'Invalid_email@') }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)  
+      end
+
+      it 'returns the json data for the erros' do
+        user_response = JSON.parse(response.body)
+        expect(user_response).to have_key('errors')
+      end
+    end
+  end
 end
