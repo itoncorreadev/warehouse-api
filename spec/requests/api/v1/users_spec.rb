@@ -26,7 +26,7 @@ RSpec.describe 'Users API', type: :request do
 
     context 'when the user does not exist' do
       let(:user_id) { 1000 }
-      it 'returns status coide 404' do
+      it 'returns status code 404' do
         expect(response).to have_http_status(404) 
       end
     end
@@ -108,7 +108,7 @@ RSpec.describe 'Users API', type: :request do
       expect(response).to have_http_status(204)  
     end
 
-    it 'removes the user from databse' do
+    it 'removes the user from database' do
       expect( User.find_by(id: user.id) ).to be_nil
     end
   end
