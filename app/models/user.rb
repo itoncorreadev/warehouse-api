@@ -4,10 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
- #validate_uniqueness_of :auth_token
+  validates :auth_token, uniqueness: true
 
  def info
-  "#{email} - #{created_at}"   
+  "#{email} - #{created_at} - Token: #{Devise.friendly_token}"
  end
  
 end
