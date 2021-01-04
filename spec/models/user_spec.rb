@@ -6,13 +6,14 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   it { is_expected.to validate_confirmation_of(:password) }
-  it { is_expected.to allow_value('cleitoncorreas@gmail.com').for(:email) }
+  it { is_expected.to allow_value('test@test.com').for(:email) }
   it { is_expected.to validate_uniqueness_of(:auth_token) }
 
   describe '#info' do
     it 'returns email, created_at and a Token' do
       user.save!
 
+      #Mocks
       allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
 
       expect(user.info).to eq("#{user.email} - #{user.created_at} - Token: abc123xyzTOKEN")
@@ -21,6 +22,7 @@ RSpec.describe User, type: :model do
 
   describe '#generate_authentication_token!' do
     it 'generates a unique auth token' do
+      #Mocks
       allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
       user.generate_authentication_token!
 
@@ -28,6 +30,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'generates another auth token when the current auth token already has been token' do
+      #Mocks
       allow(Devise).to receive(:friendly_token).and_return('abc123tokenxyz', 'abc123tokenxyz', 'abcXYZ123456789')
       existing_user = create(:user)
       user.generate_authentication_token!

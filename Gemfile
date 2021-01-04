@@ -34,6 +34,7 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.5.3'
   gem 'factory_girl_rails'
+  #gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.1'
 end

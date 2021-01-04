@@ -12,11 +12,9 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-
     if user.save
       render json: user, status: 201
     else
-      # byebug
       render json: { errors: user.errors }, status: 422
     end
   end
@@ -36,11 +34,10 @@ class Api::V1::UsersController < ApplicationController
     user.destroy
     head 204
   end
-  
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :user_token)
   end
 end

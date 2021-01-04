@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
+  before { host! 'api.warehouse.test' }
   let!(:user) { create(:user) }
   let(:user_id) { user.id }
   let(:headers) do
@@ -9,8 +10,6 @@ RSpec.describe 'Users API', type: :request do
       'Content-Type' => Mime[:json].to_s
     }
   end
-
-  before { host! 'api.warehouse.test' }
 
   describe 'GET /users/:id' do
     before do
@@ -23,14 +22,14 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns status code 200' do
-        expect(response).to have_http_status(200) 
+        expect(response).to have_http_status(200)
       end
     end
 
     context 'when the user does not exist' do
       let(:user_id) { 1000 }
       it 'returns status code 404' do
-        expect(response).to have_http_status(404) 
+        expect(response).to have_http_status(404)
       end
     end
   end
@@ -53,10 +52,10 @@ RSpec.describe 'Users API', type: :request do
     end
 
     context 'when the request params are invalid' do
-      let(:user_params) { attributes_for(:user, email: 'Invalid_email@') }
+      let(:user_params) { attributes_for(:user, email: 'invalid_email@') }
 
       it 'returns status code 422' do
-        expect(response).to have_http_status(422)  
+        expect(response).to have_http_status(422)
       end
 
       it 'returns the json data for the erros' do
@@ -69,6 +68,7 @@ RSpec.describe 'Users API', type: :request do
     before do
       put "/users/#{user_id}", params: { user: user_params }.to_json, headers: headers
     end
+
     context 'when the request params are valid' do
       let(:user_params) { { email: 'new_email@warehouse.com' } }
 
@@ -77,7 +77,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns the json data for the updated user' do
-        expect(json_body[:email]).to eq(user_params[:email])  
+        expect(json_body[:email]).to eq(user_params[:email])
       end
     end
 
@@ -85,7 +85,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_params) { { email: 'invalid_email@' } }
 
       it 'returns status code 422' do
-        expect(response).to have_http_status(422)  
+        expect(response).to have_http_status(422)
       end
 
       it 'returns the json data for the erros' do
@@ -100,7 +100,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     it 'returns status code 204' do
-      expect(response).to have_http_status(204)  
+      expect(response).to have_http_status(204)
     end
 
     it 'removes the user from database' do
