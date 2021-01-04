@@ -7,7 +7,8 @@ RSpec.describe 'Users API', type: :request do
   let(:headers) do
     {
       'Accept' => 'application/vnd.warehouse.v1',
-      'Content-Type' => Mime[:json].to_s
+      'Content-Type' => Mime[:json].to_s,
+      'Authorization' => user.auth_token
     }
   end
 
