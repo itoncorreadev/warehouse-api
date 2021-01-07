@@ -7,7 +7,6 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates_uniqueness_of :auth_token
-  #validates :auth_token, uniqueness: true
   before_create :generate_authentication_token!
 
   has_many :tasks, dependent: :destroy
