@@ -102,6 +102,8 @@ GEM
       activerecord (>= 5.0)
     puma (3.12.6)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -197,6 +199,7 @@ DEPENDENCIES
   omniauth
   pg (~> 0.18)
   puma (~> 3.0)
+  rack-cors
   rails (~> 5.0.1)
   ransack
   rspec-rails (~> 3.5)
