@@ -200,7 +200,7 @@ DEPENDENCIES
   faker
   listen (~> 3.0.5)
   omniauth
-  pg (~> 0.18)
+  pg
   puma (~> 3.10.0)
   rack-cors
   rails (~> 5.0.1)
