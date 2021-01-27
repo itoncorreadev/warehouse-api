@@ -34,13 +34,13 @@ RSpec.describe 'Supplier API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:notebook_supplier_1) { create(:supplier, description: 'Check if the notebook is broken') }
-      let!(:notebook_supplier_2) { create(:supplier, description: 'Buy a new notebook') }
-      let!(:other_supplier_1) { create(:supplier, description: 'Fix the door') }
-      let!(:other_supplier_2) { create(:supplier, description: 'Buy a new car') }
+      let!(:notebook_supplier_1) { create(:supplier, description: 'Supermarket') }
+      let!(:notebook_supplier_2) { create(:supplier, description: 'Multimarket') }
+      let!(:other_supplier_1) { create(:supplier, description: 'Shopping') }
+      let!(:other_supplier_2) { create(:supplier, description: 'MiniShopping') }
 
       before do
-        get '/suppliers?q[description_cont]=note&q[s]=description+ASC', params: {}, headers: headers
+        get '/suppliers?q[description_cont]=mark&q[s]=description+ASC', params: {}, headers: headers
       end
 
       it 'returns only the suppliers matching and in the correct order' do

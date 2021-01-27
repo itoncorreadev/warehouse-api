@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :destroy]
       resources :tasks, only: [:index, :show, :create, :update, :destroy]
       resources :suppliers, only: [:index, :show, :create, :update, :destroy]
+      resources :groups, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
