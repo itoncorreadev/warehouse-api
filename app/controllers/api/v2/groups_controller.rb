@@ -12,4 +12,20 @@ class Api::V2::GroupsController < Api::V2::BaseController
 
     render json: group, status: 200
   end
+
+  def create
+    group = Group.new(group_params)
+
+    if group.save
+      render json: group, status: 201
+    else
+      render json: { errors: group.errors }, status: 422
+    end
+  end
+
+  private
+
+  def group_params
+    params.require(:group).permit(:name, :status)
+  end
 end

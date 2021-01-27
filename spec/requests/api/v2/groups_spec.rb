@@ -67,4 +67,43 @@ RSpec.describe 'Group API' do
     end
   end
 
+  describe 'POST /groups' do
+    before do
+      post '/groups', params: { group: group_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:group_params) { attributes_for(:group) }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+
+      it 'returns the group in database' do
+        expect( Group.find_by(name: group_params[:name]) ).not_to be_nil
+      end
+
+      it 'returns the json for create group' do
+        expect(json_body[:data][:attributes][:name]).to eq(group_params[:name])
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:group_params) { attributes_for(:group, name: ' ') }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'does not save the group in the database' do
+        expect( Group.find_by(name: group_params[:name]) ).to be_nil
+      end
+
+      it 'returns the json error for group' do
+        expect(json_body[:errors]).to have_key(:name)
+      end
+    end
+  end
+
+
 end
