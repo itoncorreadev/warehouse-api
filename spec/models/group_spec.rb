@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:group) { build(:group) }
+
+  context 'When is new' do
+    it { expect(group).to be_status }
+  end
+
+  it { is_expected.to validate_presence_of :name }
+
+  it { is_expected.to respond_to(:name) }
 end
