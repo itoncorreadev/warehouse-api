@@ -129,7 +129,19 @@ RSpec.describe 'Group API' do
     end
 
     context 'when the params are invalid' do
+      let(:group_params) { { name: ' ' } }
 
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns the json error for group' do
+        expect(json_body[:errors]).to have_key(:name)
+      end
+
+      it 'does not update the group in the database' do
+        expect(Group.find_by(name: group_params[:name])).to be_nil
+      end
     end
   end
 

@@ -29,7 +29,7 @@ class Api::V2::GroupsController < Api::V2::BaseController
     if group.update_attributes(group_params)
       render json: group, status: 200
     else
-      render json: { errors: group.errors }, status: 200
+      render json: { errors: group.errors }, status: 422
     end
   end
 
