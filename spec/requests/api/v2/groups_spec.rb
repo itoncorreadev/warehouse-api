@@ -145,5 +145,19 @@ RSpec.describe 'Group API' do
     end
   end
 
+  describe 'DELETE /groups/:id' do
+    let!(:group) { create(:group) }
 
+    before do
+      delete "/groups/#{group.id}", params: {}, headers: headers
+    end
+
+    it 'return status code 204' do
+      expect(response).to have_http_status(204)
+    end
+
+    it 'removes the group from the database' do
+      expect{ Group.find(group.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end
