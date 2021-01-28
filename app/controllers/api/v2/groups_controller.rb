@@ -23,6 +23,16 @@ class Api::V2::GroupsController < Api::V2::BaseController
     end
   end
 
+  def update
+    group = Group.find(params[:id])
+
+    if group.update_attributes(group_params)
+      render json: group, status: 200
+    else
+      render json: { errors: group.errors }, status: 200
+    end
+  end
+
   private
 
   def group_params

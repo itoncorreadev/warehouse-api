@@ -105,5 +105,33 @@ RSpec.describe 'Group API' do
     end
   end
 
+  describe 'PUT /groups/:id' do
+    let!(:group) { create(:group) }
+
+    before do
+      put "/groups/#{group.id}", params: { group: group_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:group_params) { { name: 'Fruits' } }
+
+      it 'return status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'retuns the json for update group' do
+        expect(json_body[:data][:attributes][:name]).to eq(group_params[:name])
+      end
+
+      it 'updates the group in database' do
+        expect(Group.find_by(name: group_params[:name])).not_to be_nil
+      end
+    end
+
+    context 'when the params are invalid' do
+
+    end
+  end
+
 
 end
