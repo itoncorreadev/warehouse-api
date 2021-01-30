@@ -6,4 +6,10 @@ class Api::V2::ProductsController < Api::V2::BaseController
 
     render json: products, status: 200
   end
+
+  def show
+    product = Product.find(params[:id])
+
+    render json: product, status: 200
+  end
 end
