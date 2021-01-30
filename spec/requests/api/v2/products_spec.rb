@@ -18,20 +18,38 @@ RSpec.describe 'Product API' do
   end
 
   describe 'GET /products' do
-    before do
-      create_list(:product, 5, group_id: group.id)
-      get '/products', params: {}, headers: headers
+
+    context 'when no filter param is sent' do
+      before do
+        create_list(:product, 5, group_id: group.id)
+        get '/products', params: {}, headers: headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns 5 products from database' do
+        expect(json_body[:data].count).to eq(5)
+      end
     end
 
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+    context 'when filter and sorting params is sent' do
+      let!(:products_1) { create(:product, name: 'Apple Gala', group_id: group.id) }
+      let!(:products_2) { create(:product, name: 'Orange Gala', group_id: group.id) }
+      let!(:products_3) { create(:product, name: 'Whater Blue', group_id: group.id) }
+      let!(:products_4) { create(:product, name: 'Whater Pure', group_id: group.id) }
+
+      before do
+        get '/products?q[name_cont]=gala&q[s]=name+ASC', params: {}, headers: headers
+      end
+
+      it 'return only the products matching and in the correct order' do
+        returned_product_names = json_body[:data].map { |t| t[:attributes][:name] }
+
+        expect(returned_product_names).to eq([products_1.name, products_2.name])
+      end
     end
-
-    it 'returns 5 products from database' do
-      expect(json_body[:products].count).to eq(5)
-    end
-
-
   end
 
 end
