@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210127163832) do
+ActiveRecord::Schema.define(version: 20210130012655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,24 @@ ActiveRecord::Schema.define(version: 20210127163832) do
     t.boolean  "status",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "category"
+    t.string   "code"
+    t.boolean  "type",        default: false
+    t.string   "measure"
+    t.integer  "min"
+    t.integer  "med"
+    t.integer  "max"
+    t.string   "location"
+    t.boolean  "status",      default: true
+    t.integer  "group_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["group_id"], name: "index_products_on_group_id", using: :btree
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -69,5 +87,6 @@ ActiveRecord::Schema.define(version: 20210127163832) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "products", "groups"
   add_foreign_key "tasks", "users"
 end
