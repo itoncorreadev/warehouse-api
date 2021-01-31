@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :suppliers, only: [:index, :show, :create, :update, :destroy]
       resources :groups, only: [:index, :show, :create, :update, :destroy]
       resources :products, only: [:index, :show, :create, :update, :destroy]
+      resources :departments, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
