@@ -22,6 +22,16 @@ class Api::V2::DepartmentsController < ApplicationController
     end
   end
 
+  def update
+    department = Department.find(params[:id])
+
+    if department.update_attributes(department_params)
+      render json: department, status: 200
+    else
+      render json: { errors: department.errors }, status: 422
+    end
+  end
+
   private
 
   def department_params

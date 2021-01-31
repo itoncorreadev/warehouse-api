@@ -104,4 +104,44 @@ RSpec.describe 'Department API' do
       end
     end
   end
+
+  describe 'PUT /departments/:id' do
+    let!(:department) { create(:department) }
+
+    before do
+      put "/departments/#{department.id}", params: { department: department_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:department_params) { { description: 'New Department' } }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns the json for updates department' do
+        expect(json_body[:data][:attributes][:description]).to eq(department_params[:description])
+      end
+
+      it 'updates the department in database' do
+        expect(Department.find_by(description: department_params[:description])).not_to be_nil
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:department_params) { { description: ' ' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns the json error for department' do
+        expect(json_body[:errors]).to have_key(:description)
+      end
+
+      it 'does not update the group in the database' do
+        expect(Department.find_by(description: department_params[:description])).to be_nil
+      end
+    end
+  end
 end
