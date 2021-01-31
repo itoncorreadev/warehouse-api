@@ -66,4 +66,42 @@ RSpec.describe 'Department API' do
       expect(json_body[:data][:attributes][:description]).to eq(department.description)
     end
   end
+
+  describe 'POST /departments' do
+    before do
+      post '/departments', params: { department: department_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:department_params) { attributes_for(:department) }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+
+      it 'returns the department in database' do
+        expect(Department.find_by(description: department_params[:description])).not_to be_nil
+      end
+
+      it 'returns the json for create department' do
+        expect(json_body[:data][:attributes][:description]).to eq(department_params[:description])
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:department_params) { attributes_for(:department, description: ' ') }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'retuns the department in the database' do
+        expect(Department.find_by(description: department_params[:description])).to be_nil
+      end
+
+      it 'retuns the json error for department' do
+        expect(json_body[:errors]).to have_key(:description)
+      end
+    end
+  end
 end

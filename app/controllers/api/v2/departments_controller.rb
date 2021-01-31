@@ -11,4 +11,20 @@ class Api::V2::DepartmentsController < ApplicationController
 
     render json: department, status: 200
   end
+
+  def create
+    department = Department.new(department_params)
+
+    if department.save
+      render json: department, status: 201
+    else
+      render json: { errors: department.errors }, status: 422
+    end
+  end
+
+  private
+
+  def department_params
+    params.require(:department).permit(:description, :status)
+  end
 end
