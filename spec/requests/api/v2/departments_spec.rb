@@ -50,4 +50,20 @@ RSpec.describe 'Department API' do
       end
     end
   end
+
+  describe 'GET /departments/:id' do
+    let(:department) { create(:department) }
+
+    before do
+      get "/departments/#{department.id}", params: {}, headers: headers
+    end
+
+    it 'return status code 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'return the json for department' do
+      expect(json_body[:data][:attributes][:description]).to eq(department.description)
+    end
+  end
 end
