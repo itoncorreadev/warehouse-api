@@ -24,6 +24,16 @@ class Api::V2::ProductsController < Api::V2::BaseController
     end
   end
 
+  def update
+    product = Product.find(params[:id])
+
+    if product.update_attributes(product_params)
+      render json: product, status: 200
+    else
+      render json: { errors: product.errors }, status: 422
+    end
+  end
+
   private
 
   def product_params
