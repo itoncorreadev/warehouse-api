@@ -66,4 +66,47 @@ RSpec.describe 'Product API' do
     end
   end
 
+  describe 'POST /products' do
+    before do
+      post '/products', params: { product: product_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      #let!(:product_params) { create(:product, group_id: group.id) }
+      let(:product_params) { attributes_for(:product, group_id: group.id) }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+
+      it 'returns the in database' do
+        expect( Product.find_by(name: product_params[:name]) ).not_to be_nil
+      end
+
+      it 'returns the json for created product' do
+        expect(json_body[:data][:attributes][:name]).to eq(product_params[:name])
+      end
+
+      it 'assigns the created product to group' do
+        expect(json_body[:data][:attributes][:'group-id']).to eq(group.id)
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:product_params) { attributes_for(:product, name: ' ') }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'does not save the product in the database' do
+        expect( Product.find_by(name: product_params[:name]) ).to be_nil
+      end
+
+      it 'returns the json error for name' do
+        expect(json_body[:errors]).to have_key(:name)
+      end
+    end
+  end
+
 end

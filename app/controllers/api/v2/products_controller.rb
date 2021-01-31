@@ -12,4 +12,22 @@ class Api::V2::ProductsController < Api::V2::BaseController
 
     render json: product, status: 200
   end
+
+  def create
+    product = Product.new(product_params)
+
+    if product.save
+      render json: product, status: 201
+    else
+      render json: { errors: product.errors }, status: 422
+
+    end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :description, :category, :code, :type, :measure, :min, :med, :max, :location, :status, :group_id)
+  end
+
 end
