@@ -144,4 +144,20 @@ RSpec.describe 'Department API' do
       end
     end
   end
+
+  describe 'DELETE /departments/:id' do
+    let!(:department) { create(:department) }
+
+    before do
+      delete "/departments/#{department.id}", params: {}, headers: headers
+    end
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+
+    it 'removes the department from the database' do
+      expect { Department.find(department.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end

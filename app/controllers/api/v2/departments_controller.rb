@@ -32,6 +32,12 @@ class Api::V2::DepartmentsController < ApplicationController
     end
   end
 
+  def destroy
+    department = Department.find(params[:id])
+    department.destroy
+    head 204
+  end
+
   private
 
   def department_params
