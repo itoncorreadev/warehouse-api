@@ -54,7 +54,7 @@ RSpec.describe 'Request API' do
   end
 
   describe 'GET /products/:product_id/requests/:id' do
-    let(:request) { create(:request, product_id: product.id) }
+    let(:request) { create(:request, product_id: product.wid) }
 
     before do
       get "/products/#{product.id}/requests/#{request.id}", params: {}, headers: headers
