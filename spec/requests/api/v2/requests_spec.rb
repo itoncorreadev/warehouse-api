@@ -53,5 +53,21 @@ RSpec.describe 'Request API' do
     end
   end
 
+  describe 'GET /products/:product_id/requests/:id' do
+    let(:request) { create(:request, product_id: product.id) }
+
+    before do
+      get "/products/#{product.id}/requests/#{request.id}", params: {}, headers: headers
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns the json for request' do
+      expect(json_body[:data][:attributes][:document]).to eq(request.document)
+    end
+  end
+
 
 end

@@ -9,6 +9,12 @@ class Api::V2::RequestsController < Api::V2::BaseController
     render json: requests, status: 200
   end
 
+  def show
+    request = Request.find_by_id_and_product_id(params[:id], params[:product_id])
+
+    render json: request, status: 200
+  end
+
   private
 
   def request_params
