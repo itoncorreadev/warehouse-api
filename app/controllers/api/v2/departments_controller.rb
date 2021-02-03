@@ -1,4 +1,5 @@
-class Api::V2::DepartmentsController < ApplicationController
+class Api::V2::DepartmentsController < Api::V2::BaseController
+  before_action :authenticate_user!
 
   def index
     departments = Department.ransack(params[:q]).result

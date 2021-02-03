@@ -1,10 +1,10 @@
 class Api::V2::GroupsController < Api::V2::BaseController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
-    group = Group.ransack(params[:q]).result
+    groups = Group.ransack(params[:q]).result
 
-    render json: group, status: 200
+    render json: groups, status: 200
   end
 
   def show

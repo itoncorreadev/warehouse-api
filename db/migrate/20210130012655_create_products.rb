@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :category
       t.string :code
-      t.boolean :type, default: false
+      t.boolean :product_type, default: false
       t.string :measure
       t.integer :min
       t.integer :med

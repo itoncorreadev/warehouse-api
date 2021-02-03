@@ -34,22 +34,22 @@ ActiveRecord::Schema.define(version: 20210131232946) do
     t.text     "description"
     t.string   "category"
     t.string   "code"
-    t.boolean  "type",        default: false
+    t.boolean  "product_type", default: false
     t.string   "measure"
     t.integer  "min"
     t.integer  "med"
     t.integer  "max"
     t.string   "location"
-    t.boolean  "status",      default: true
+    t.boolean  "status",       default: true
     t.integer  "group_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["group_id"], name: "index_products_on_group_id", using: :btree
   end
 
   create_table "requests", force: :cascade do |t|
     t.datetime "date"
-    t.string   "type"
+    t.string   "request_type"
     t.string   "document"
     t.string   "document_code"
     t.integer  "quantity"

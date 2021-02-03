@@ -34,10 +34,10 @@ RSpec.describe 'Group API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:notebook_group_1) { create(:group, name: 'Supermarket') }
-      let!(:notebook_group_2) { create(:group, name: 'Multimarket') }
-      let!(:other_group_1) { create(:group, name: 'Shopping') }
-      let!(:other_group_2) { create(:group, name: 'MiniShopping') }
+      let!(:group_1) { create(:group, name: 'Supermarket') }
+      let!(:group_2) { create(:group, name: 'Multimarket') }
+      let!(:group_3) { create(:group, name: 'Shopping') }
+      let!(:group_4) { create(:group, name: 'MiniShopping') }
 
       before do
         get '/groups?q[name_cont]=mark&q[s]=name+ASC', params: {}, headers: headers
@@ -46,7 +46,7 @@ RSpec.describe 'Group API' do
       it 'returns only the groups matching and in the correct order' do
         returned_group_name = json_body[:data].map { |t| t[:attributes][:name] }
 
-        expect(returned_group_name).to eq([notebook_group_2.name, notebook_group_1.name])
+        expect(returned_group_name).to eq([group_2.name, group_1.name])
       end
     end
   end

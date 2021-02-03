@@ -1,6 +1,6 @@
 class Request < ApplicationRecord
   belongs_to :product
-  belongs_to :department
+  belongs_to :department, optional: true
 
-  validates_presence_of :date, :type, :unit_price, :product_id, :department_id
+  validates_presence_of :date, :product_id, :department_id
 end

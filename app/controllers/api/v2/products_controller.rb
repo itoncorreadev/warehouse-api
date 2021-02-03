@@ -1,5 +1,5 @@
 class Api::V2::ProductsController < Api::V2::BaseController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
     products = Product.ransack(params[:q]).result
@@ -14,13 +14,15 @@ class Api::V2::ProductsController < Api::V2::BaseController
   end
 
   def create
+    group = Group.first
     product = Product.new(product_params)
+    product.group = group
+
 
     if product.save
       render json: product, status: 201
     else
       render json: { errors: product.errors }, status: 422
-
     end
   end
 
@@ -43,7 +45,7 @@ class Api::V2::ProductsController < Api::V2::BaseController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :category, :code, :type, :measure, :min, :med, :max, :location, :status, :group_id)
+    params.require(:product).permit(:name, :description, :category, :code, :product_type, :measure, :min, :med, :max, :location, :status)
   end
 
 end

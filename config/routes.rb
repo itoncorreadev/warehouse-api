@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :groups, only: [:index, :show, :create, :update, :destroy]
       resources :products, only: [:index, :show, :create, :update, :destroy]
       resources :departments, only: [:index, :show, :create, :update, :destroy]
+      resources :requests, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

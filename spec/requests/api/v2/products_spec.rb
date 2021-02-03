@@ -21,7 +21,7 @@ RSpec.describe 'Product API' do
 
     context 'when no filter param is sent' do
       before do
-        create_list(:product, 5, group_id: group.id)
+        create_list(:product, 5)
         get '/products', params: {}, headers: headers
       end
 
@@ -35,10 +35,10 @@ RSpec.describe 'Product API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:products_1) { create(:product, name: 'Apple Gala', group_id: group.id) }
-      let!(:products_2) { create(:product, name: 'Orange Gala', group_id: group.id) }
-      let!(:products_3) { create(:product, name: 'Whater Blue', group_id: group.id) }
-      let!(:products_4) { create(:product, name: 'Whater Pure', group_id: group.id) }
+      let!(:products_1) { create(:product, name: 'Apple Gala') }
+      let!(:products_2) { create(:product, name: 'Orange Gala') }
+      let!(:products_3) { create(:product, name: 'Whater Blue') }
+      let!(:products_4) { create(:product, name: 'Whater Pure') }
 
       before do
         get '/products?q[name_cont]=gala&q[s]=name+ASC', params: {}, headers: headers
@@ -53,7 +53,7 @@ RSpec.describe 'Product API' do
   end
 
   describe 'GET /products/:id' do
-    let(:product) { create(:product, group_id: group.id ) }
+    let(:product) { create(:product) }
 
     before { get "/products/#{product.id}", params: {}, headers: headers }
 
@@ -64,6 +64,10 @@ RSpec.describe 'Product API' do
     it 'returns the json for product' do
       expect(json_body[:data][:attributes][:description]).to eq(product.description)
     end
+
+    it 'One Product' do
+      expect(product.group).to be_kind_of(Group)
+    end
   end
 
   describe 'POST /products' do
@@ -72,8 +76,7 @@ RSpec.describe 'Product API' do
     end
 
     context 'when the params are valid' do
-      #let!(:product_params) { create(:product, group_id: group.id) }
-      let(:product_params) { attributes_for(:product, group_id: group.id) }
+      let(:product_params) { attributes_for(:product) }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -87,7 +90,7 @@ RSpec.describe 'Product API' do
         expect(json_body[:data][:attributes][:name]).to eq(product_params[:name])
       end
 
-      it 'assigns the created product to group' do
+      it 'assigns the created product to the group' do
         expect(json_body[:data][:attributes][:'group-id']).to eq(group.id)
       end
     end
@@ -110,7 +113,7 @@ RSpec.describe 'Product API' do
   end
 
   describe 'PUT /products/:id' do
-    let!(:product) { create(:product, group_id: group.id) }
+    let!(:product) { create(:product) }
 
     before do
       put "/products/#{product.id}", params: { product: product_params }.to_json, headers: headers
@@ -152,7 +155,7 @@ RSpec.describe 'Product API' do
   end
 
   describe 'DELETE /products/:id' do
-    let!(:product) { create(:product, group_id: group.id) }
+    let!(:product) { create(:product) }
 
     before do
       delete "/products/#{product.id}", params: {}, headers: headers

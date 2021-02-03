@@ -2,7 +2,7 @@ class CreateRequests < ActiveRecord::Migration[5.0]
   def change
     create_table :requests do |t|
       t.datetime :date
-      t.string :type
+      t.string :request_type
       t.string :document
       t.string :document_code
       t.integer :quantity

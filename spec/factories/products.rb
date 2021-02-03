@@ -1,16 +1,15 @@
 FactoryGirl.define do
   factory :product do
-    name { Faker::Commerce.product_name }
+    name { Faker::Lorem.sentence }
     description { Faker::Lorem.sentence }
-    category { Faker::Commerce.material }
-    code { Faker::Commerce.promotion_code }
-    type false
+    category { Faker::Lorem.sentence }
+    code { Faker::Number.number(digits: 10) }
+    product_type false
     measure 'un'
-    min { Faker::Number.decimal_part(digits: 2) }
-    med { Faker::Number.decimal_part(digits: 2) }
-    max { Faker::Number.decimal_part(digits: 2) }
-    location { Faker::Commerce.department(max: 1, fixed_amount: true) }
-    status true
+    min { Faker::Number.number(digits: 2) }
+    med { Faker::Number.number(digits: 2) }
+    max { Faker::Number.number(digits: 2) }
+    location { Faker::Lorem.sentence }
     group
   end
 end

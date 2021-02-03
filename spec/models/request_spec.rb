@@ -9,12 +9,10 @@ RSpec.describe Request, type: :model do
 
   it { is_expected.to validate_presence_of :product_id }
   it { is_expected.to validate_presence_of :department_id }
-  it { is_expected.to validate_presence_of :type }
-  it { is_expected.to validate_presence_of :unit_price }
   it { is_expected.to validate_presence_of :date }
 
   it { is_expected.to respond_to(:date) }
-  it { is_expected.to respond_to(:type) }
+  it { is_expected.to respond_to(:request_type) }
   it { is_expected.to respond_to(:document) }
   it { is_expected.to respond_to(:document_code) }
   it { is_expected.to respond_to(:quantity) }
