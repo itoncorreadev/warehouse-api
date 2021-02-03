@@ -54,7 +54,7 @@ RSpec.describe 'Request API' do
   end
 
   describe 'GET /products/:product_id/requests/:id' do
-    let(:request) { create(:request, product_id: product.wid) }
+    let(:request) { create(:request, product_id: product.id) }
 
     before do
       get "/products/#{product.id}/requests/#{request.id}", params: {}, headers: headers
@@ -66,6 +66,48 @@ RSpec.describe 'Request API' do
 
     it 'returns the json for request' do
       expect(json_body[:data][:attributes][:document]).to eq(request.document)
+    end
+  end
+
+  describe 'POST /products/:product_id/requests' do
+    before do
+      post "/products/#{product.id}/requests", params: { request: request_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:request_params) { attributes_for(:request) }
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+
+      it 'returns the in database' do
+        expect(Request.find_by(document: request_params[:document])).not_to be_nil
+      end
+
+      it 'returns the json for created request' do
+        expect(json_body[:data][:attributes][:document]).to eq(request_params[:document])
+      end
+
+      it 'assigns the created task to the current user' do
+        expect(json_body[:data][:attributes][:'product-id']).to eq(product.id)
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:request_params) { attributes_for(:request, document: '') }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns the in database' do
+        expect(Request.find_by(document: request_params[:document])).to be_nil
+      end
+
+      it 'returns the json error for request' do
+        expect(json_body[:errors]).to have_key(:document)
+      end
     end
   end
 
