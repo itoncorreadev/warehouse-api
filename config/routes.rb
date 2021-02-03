@@ -19,9 +19,11 @@ Rails.application.routes.draw do
       resources :tasks, only: [:index, :show, :create, :update, :destroy]
       resources :suppliers, only: [:index, :show, :create, :update, :destroy]
       resources :groups, only: [:index, :show, :create, :update, :destroy]
-      resources :products, only: [:index, :show, :create, :update, :destroy]
       resources :departments, only: [:index, :show, :create, :update, :destroy]
-      resources :requests, only: [:index, :show, :create, :update, :destroy]
+
+      resources :products do
+        resources :requests, only: [:index, :show, :create, :update, :destroy]
+      end
     end
   end
 end

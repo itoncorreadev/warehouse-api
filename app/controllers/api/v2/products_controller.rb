@@ -18,7 +18,6 @@ class Api::V2::ProductsController < Api::V2::BaseController
     product = Product.new(product_params)
     product.group = group
 
-
     if product.save
       render json: product, status: 201
     else

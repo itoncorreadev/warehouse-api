@@ -8,8 +8,6 @@ RSpec.describe Request, type: :model do
   end
 
   it { is_expected.to validate_presence_of :product_id }
-  it { is_expected.to validate_presence_of :department_id }
-  it { is_expected.to validate_presence_of :date }
 
   it { is_expected.to respond_to(:date) }
   it { is_expected.to respond_to(:request_type) }
