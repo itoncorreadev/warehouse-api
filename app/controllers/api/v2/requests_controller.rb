@@ -18,11 +18,13 @@ class Api::V2::RequestsController < Api::V2::BaseController
   def create
     product = Product.find(params[:product_id])
     department = Department.first
+    supplier = Supplier.first
 
     request = Request.new(request_params)
 
     request.product = product
     request.department = department
+    request.supplier = supplier
 
     if request.save
       render json: request, status: 201

@@ -19,6 +19,7 @@ RSpec.describe Request, type: :model do
   it { is_expected.to respond_to(:total_price) }
   it { is_expected.to respond_to(:observation) }
   it { is_expected.to respond_to(:status) }
+  it { is_expected.to respond_to(:supplier_id) }
   it { is_expected.to respond_to(:product_id) }
   it { is_expected.to respond_to(:department_id) }
 

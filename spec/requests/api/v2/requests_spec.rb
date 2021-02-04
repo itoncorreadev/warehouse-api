@@ -6,6 +6,7 @@ RSpec.describe 'Request API' do
   let!(:user) { create(:user) }
   let!(:product) { create(:product) }
   let!(:department) { create(:department) }
+  let!(:supplier) { create(:supplier) }
   let!(:auth_data) {  user.create_new_auth_token }
   let(:headers) do
     {

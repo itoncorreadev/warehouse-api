@@ -9,6 +9,7 @@ FactoryGirl.define do
     total_price { Faker::Number.decimal_part(digits: 2) }
     observation { Faker::Lorem.sentence }
     status false
+    supplier
     product
     department
   end
