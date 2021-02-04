@@ -151,4 +151,20 @@ RSpec.describe 'Request API' do
     end
 
   end
+
+  describe 'DELETE /products/:product_id/requests/:id' do
+    let!(:request) { create(:request) }
+
+    before do
+      delete "/products/#{product.id}/requests/#{request.id}"
+    end
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+
+    it 'removes the request from the database' do
+      expect { Request.find(request.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end

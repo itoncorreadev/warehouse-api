@@ -41,6 +41,12 @@ class Api::V2::RequestsController < Api::V2::BaseController
     end
   end
 
+  def destroy
+    request = Request.find(params[:id])
+    request.destroy
+    head 204
+  end
+
   private
 
   def request_params
