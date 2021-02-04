@@ -111,5 +111,44 @@ RSpec.describe 'Request API' do
     end
   end
 
+  describe 'PUT /products/:product_id/requests/:id' do
+    let!(:request) { create(:request) }
 
+    before do
+      put "/products/#{product.id}/requests/#{request.id}", params: { request: request_params }.to_json, headers: headers
+    end
+
+    context 'when the params are valid' do
+      let(:request_params) { { document: 'Update document' } }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns the json for updated task' do
+        expect(json_body[:data][:attributes][:document]).to eq(request_params[:document])
+      end
+
+      it 'updates the task in the database' do
+        expect(Request.find_by(document: request_params[:document])).not_to be_nil
+      end
+    end
+
+    context 'when the params are invalid' do
+      let(:request_params) { { document: '' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'does not update the request in the database' do
+        expect( Request.find_by(document: request_params[:document])).to be_nil
+      end
+
+      it 'returns the json error for document' do
+        expect(json_body[:errors]).to have_key(:document)
+      end
+    end
+
+  end
 end

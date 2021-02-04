@@ -142,11 +142,11 @@ RSpec.describe 'Product API' do
         expect(response).to have_http_status(422)
       end
 
-      it 'returns the json error for title' do
+      it 'returns the json error for name' do
         expect(json_body[:errors]).to have_key(:name)
       end
 
-      it 'does not update the task in the database' do
+      it 'does not update the product in the database' do
         expect( Product.find_by(name: product_params[:name])).to be_nil
       end
 

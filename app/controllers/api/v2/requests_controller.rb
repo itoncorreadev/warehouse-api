@@ -31,6 +31,16 @@ class Api::V2::RequestsController < Api::V2::BaseController
     end
   end
 
+  def update
+    request = Request.find(params[:id])
+
+    if request.update_attributes(request_params)
+      render json: request, status: 200
+    else
+      render json: { errors: request.errors }, status: 422
+    end
+  end
+
   private
 
   def request_params
