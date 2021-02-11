@@ -3,7 +3,6 @@ class CreateProducts < ActiveRecord::Migration[5.0]
     create_table :products do |t|
       t.string :name
       t.text :description
-      t.string :category
       t.string :code
       t.boolean :product_type, default: false
       t.string :measure

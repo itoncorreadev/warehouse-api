@@ -15,7 +15,6 @@ RSpec.describe Product, type: :model do
 
   it { is_expected.to respond_to(:name) }
   it { is_expected.to respond_to(:description) }
-  it { is_expected.to respond_to(:category) }
   it { is_expected.to respond_to(:code) }
   it { is_expected.to respond_to(:product_type) }
   it { is_expected.to respond_to(:measure) }
@@ -25,4 +24,5 @@ RSpec.describe Product, type: :model do
   it { is_expected.to respond_to(:location) }
   it { is_expected.to respond_to(:status) }
   it { is_expected.to respond_to(:group_id) }
+  it { is_expected.to respond_to(:category_id) }
 end

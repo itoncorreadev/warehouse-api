@@ -5,6 +5,7 @@ RSpec.describe 'Product API' do
 
   let!(:user) { create(:user) }
   let!(:group) { create(:group) }
+  let!(:category) { create(:category) }
   let!(:auth_data) {  user.create_new_auth_token }
   let(:headers) do
     {
@@ -92,6 +93,10 @@ RSpec.describe 'Product API' do
 
       it 'assigns the created product to the group' do
         expect(json_body[:data][:attributes][:'group-id']).to eq(group.id)
+      end
+
+      it 'assigns the created product to the category' do
+        expect(json_body[:data][:attributes][:'category-id']).to eq(category.id)
       end
     end
 

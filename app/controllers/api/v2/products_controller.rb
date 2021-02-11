@@ -15,8 +15,11 @@ class Api::V2::ProductsController < Api::V2::BaseController
 
   def create
     group = Group.first
+    category = Category.first
+
     product = Product.new(product_params)
     product.group = group
+    product.category = category
 
     if product.save
       render json: product, status: 201
@@ -44,7 +47,7 @@ class Api::V2::ProductsController < Api::V2::BaseController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :category, :code, :product_type, :measure, :min, :med, :max, :location, :status)
+    params.require(:product).permit(:name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status)
   end
 
 end

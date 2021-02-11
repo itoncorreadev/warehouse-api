@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :product do
     name { Faker::Lorem.sentence }
     description { Faker::Lorem.sentence }
-    category { Faker::Lorem.sentence }
     code { Faker::Number.number(digits: 10) }
     product_type false
     measure 'un'
@@ -11,5 +10,6 @@ FactoryGirl.define do
     max { Faker::Number.number(digits: 2) }
     location { Faker::Lorem.sentence }
     group
+    category
   end
 end

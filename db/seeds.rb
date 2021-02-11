@@ -20,7 +20,20 @@ Group.create([
   }
 ])
 
-
+Category.create([
+  {
+    description: 'Diversos',
+    status: true
+  },
+  {
+    description: 'Papel Higiênico',
+    status: true
+  },
+  {
+    description: 'Alcool 70%',
+    status: true
+  }
+])
 
 Department.create([
   {
@@ -50,5 +63,16 @@ Department.create([
   {
     description: 'Social',
     status: true
+  }
+])
+
+Supplier.create([
+  {
+    description: 'Interno',
+    type_document: 'CNPJ',
+    document: '',
+    address: 'AV Marechal Floriano, 114 - Rio de Janeiro/RJ - CEP: 20080-002',
+    phone: '(21) 2216-7800',
+    comment: ''
   }
 ])
