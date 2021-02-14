@@ -70,9 +70,9 @@ Supplier.create([
   {
     description: 'Interno',
     type_document: 'CNPJ',
-    document: '',
+    document: '33.915.604/0001-17',
     address: 'AV Marechal Floriano, 114 - Rio de Janeiro/RJ - CEP: 20080-002',
     phone: '(21) 2216-7800',
-    comment: ''
+    comment: 'Fornecedor para requisições internas'
   }
 ])
