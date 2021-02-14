@@ -6,7 +6,6 @@ class CreateRequests < ActiveRecord::Migration[5.0]
       t.string :description
       t.string :document_type
       t.string :document_code
-      t.text :observation
       t.boolean :status, default: false
       t.references :product, foreign_key: true
       t.references :department, foreign_key: true

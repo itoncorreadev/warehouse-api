@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210211134001) do
+ActiveRecord::Schema.define(version: 20210212204217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20210211134001) do
     t.boolean  "status",      default: true
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "details", force: :cascade do |t|
+    t.integer  "quantity"
+    t.float    "unit_price"
+    t.float    "total_price"
+    t.text     "observation"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "request_id"
+    t.index ["product_id"], name: "index_details_on_product_id", using: :btree
+    t.index ["request_id"], name: "index_details_on_request_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -61,7 +74,6 @@ ActiveRecord::Schema.define(version: 20210211134001) do
     t.string   "description"
     t.string   "document_type"
     t.string   "document_code"
-    t.text     "observation"
     t.boolean  "status",        default: false
     t.integer  "product_id"
     t.integer  "department_id"
@@ -122,6 +134,8 @@ ActiveRecord::Schema.define(version: 20210211134001) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "details", "products"
+  add_foreign_key "details", "requests"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "groups"
   add_foreign_key "requests", "departments"

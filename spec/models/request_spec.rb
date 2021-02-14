@@ -15,7 +15,6 @@ RSpec.describe Request, type: :model do
   it { is_expected.to respond_to(:description) }
   it { is_expected.to respond_to(:document_type) }
   it { is_expected.to respond_to(:document_code) }
-  it { is_expected.to respond_to(:observation) }
   it { is_expected.to respond_to(:status) }
   it { is_expected.to respond_to(:supplier_id) }
   it { is_expected.to respond_to(:product_id) }

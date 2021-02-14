@@ -53,6 +53,6 @@ class Api::V2::RequestsController < Api::V2::BaseController
   private
 
   def request_params
-    params.require(:request).permit(:date, :request_type, :description, :document_type, :document_code, :observation, :status)
+    params.require(:request).permit(:date, :request_type, :description, :document_type, :document_code, :status)
   end
 end

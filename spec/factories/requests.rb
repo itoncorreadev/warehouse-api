@@ -5,7 +5,6 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     document_type 'nf'
     document_code { Faker::Number.number(digits: 10) }
-    observation { Faker::Lorem.sentence }
     status false
     supplier
     department
