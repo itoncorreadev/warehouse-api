@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
-  has_many :product, dependent: :destroy
+  has_many :products, dependent: :destroy
+  has_many :categories, through: :products
 
   validates_presence_of :name
 end

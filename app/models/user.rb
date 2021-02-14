@@ -10,7 +10,8 @@ class User < ApplicationRecord
   before_create :generate_authentication_token!
 
   has_many :tasks, dependent: :destroy
-  has_many :request
+  has_many :requests
+
 
  def info
   "#{email} - #{created_at} - Token: #{Devise.friendly_token}"

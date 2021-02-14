@@ -1,5 +1,5 @@
 class Department < ApplicationRecord
-  has_many :request, dependent: :destroy
+  has_many :requests
 
   validates_presence_of :description
 end

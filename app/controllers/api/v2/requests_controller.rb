@@ -17,7 +17,7 @@ class Api::V2::RequestsController < Api::V2::BaseController
     department = Department.first
     supplier = Supplier.first
 
-    request = current_user.request.new(request_params)
+    request = current_user.requests.new(request_params)
 
     request.department = department
     request.supplier = supplier

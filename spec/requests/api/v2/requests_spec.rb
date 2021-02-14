@@ -156,7 +156,7 @@ RSpec.describe 'Request API' do
     let!(:request) { create(:request) }
 
     before do
-      delete "/requests/#{request.id}"
+      delete "/requests/#{request.id}", params: {}, headers: headers
     end
 
     it 'returns status code 204' do

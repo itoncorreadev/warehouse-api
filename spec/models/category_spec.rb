@@ -7,7 +7,7 @@ RSpec.describe Category, type: :model do
     it { expect(category).to be_status }
   end
 
-  it { is_expected.to have_many(:product) }
+  it { is_expected.to have_many(:products) }
 
   it { is_expected.to validate_presence_of :description }
 
