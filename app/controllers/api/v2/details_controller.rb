@@ -1,20 +1,20 @@
 class Api::V2::DetailsController < Api::V2::BaseController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
-    details = Detail.ransack(params[:q]).result()
+    details = Detail.ransack(params[:q]).result().where(request_id: params[:request_id])
 
     render json: details, status: 200
   end
 
   def show
-    detail = Detail.find(params[:id])
+    detail = Detail.find_by(request_id: params[:request_id], id: params[:id])
 
     render json: detail, status: 200
   end
 
   def create
-    request = Request.first
+    request = Request.find(params[:request_id])
     product = Product.first
 
     detail = Detail.new(detail_params)
