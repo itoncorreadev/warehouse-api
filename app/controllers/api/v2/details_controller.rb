@@ -1,5 +1,5 @@
 class Api::V2::DetailsController < Api::V2::BaseController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
     details = Detail.ransack(params[:q]).result().where(request_id: params[:request_id])
@@ -15,7 +15,7 @@ class Api::V2::DetailsController < Api::V2::BaseController
 
   def create
     request = Request.find(params[:request_id])
-    product = Product.first
+    product = Product.find(detail_params[:product_id])
 
     detail = Detail.new(detail_params)
 
@@ -48,6 +48,6 @@ class Api::V2::DetailsController < Api::V2::BaseController
   private
 
   def detail_params
-    params.require(:detail).permit(:quantity, :unit_price, :total_price, :observation)
+    params.require(:detail).permit(:quantity, :unit_price, :total_price, :observation, :product_id)
   end
 end
