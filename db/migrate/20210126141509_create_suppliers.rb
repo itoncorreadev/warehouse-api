@@ -7,6 +7,7 @@ class CreateSuppliers < ActiveRecord::Migration[5.0]
       t.string :address
       t.string :phone
       t.text :comment
+      t.boolean :status, default: true
 
       t.timestamps
     end

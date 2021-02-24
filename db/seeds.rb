@@ -17,6 +17,14 @@ Group.create([
   {
     name: 'Limpeza e Higiene',
     status: true
+  },
+  {
+    name: 'Papelaria',
+    status: true
+  },
+  {
+    name: 'Uniformes',
+    status: true
   }
 ])
 
@@ -31,6 +39,10 @@ Category.create([
   },
   {
     description: 'Alcool 70%',
+    status: true
+  },
+  {
+    description: 'Desifetante',
     status: true
   }
 ])

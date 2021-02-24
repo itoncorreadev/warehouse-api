@@ -1,14 +1,14 @@
 class Api::V2::TasksController < Api::V2::BaseController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
-    tasks = current_user.tasks.ransack(params[:q]).result
+    tasks = Task.ransack(params[:q]).result
 
     render json: tasks, status: 200
   end
 
   def show
-    task = current_user.tasks.find(params[:id])
+    task = Task.find(params[:id])
 
     render json: task, status: 200
   end
@@ -24,7 +24,8 @@ class Api::V2::TasksController < Api::V2::BaseController
   end
 
   def update
-    task = current_user.tasks.find(params[:id])
+    user = User.find(task_params[:user_id])
+    task = Task.find(params[:id])
 
     if task.update_attributes(task_params)
       render json: task, status: 200
@@ -42,6 +43,6 @@ class Api::V2::TasksController < Api::V2::BaseController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline, :done)
+    params.require(:task).permit(:title, :description, :deadline, :done, :user_id)
   end
 end

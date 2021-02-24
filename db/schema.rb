@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20210212204217) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "description"
-    t.boolean  "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "status",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "departments", force: :cascade do |t|
@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20210212204217) do
     t.string   "description"
     t.string   "document_type"
     t.string   "document_code"
-    t.boolean  "status",        default: false
+    t.boolean  "status",        default: true
     t.integer  "product_id"
     t.integer  "department_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "supplier_id"
     t.integer  "user_id"
     t.index ["department_id"], name: "index_requests_on_department_id", using: :btree
@@ -94,8 +94,9 @@ ActiveRecord::Schema.define(version: 20210212204217) do
     t.string   "address"
     t.string   "phone"
     t.text     "comment"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "status",        default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "tasks", force: :cascade do |t|

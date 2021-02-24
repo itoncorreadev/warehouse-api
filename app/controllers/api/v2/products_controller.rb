@@ -1,5 +1,5 @@
 class Api::V2::ProductsController < Api::V2::BaseController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
     products = Product.ransack(params[:q]).result
@@ -48,7 +48,7 @@ class Api::V2::ProductsController < Api::V2::BaseController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status)
+    params.require(:product).permit(:name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status, :group_id, :category_id)
   end
 
 end

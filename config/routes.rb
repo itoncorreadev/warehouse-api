@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   # constraints: { subdomain: 'api' }
   namespace :api, defaults: { format: :json }, path: '/' do
     namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1) do
-      resources :users, only: [:show, :create, :update, :destroy]
+      resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]
       resources :tasks, only: [:index, :show, :create, :update, :destroy]
     end
 
     namespace :v2, path: '/', constraints: ApiVersionConstraint.new(version: 2, default: true) do
       mount_devise_token_auth_for 'User', at: 'auth'
-      resources :users, only: [:show, :create, :update, :destroy]
+      resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]
       resources :tasks, only: [:index, :show, :create, :update, :destroy]
       resources :suppliers, only: [:index, :show, :create, :update, :destroy]
