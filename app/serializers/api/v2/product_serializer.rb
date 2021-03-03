@@ -31,11 +31,11 @@ class Api::V2::ProductSerializer < ActiveModel::Serializer
   end
 
   def quantity_description
-    if quantity_measure = 'danger'
+    if quantity_measure == 'danger'
       return 'Abaixo do mínimo'
-    elsif quantity_measure = 'warning'
+    elsif quantity_measure == 'warning'
       return 'Acima do mínimo & abaixo do médio'
-    elsif quantity_measure = 'success'
+    elsif quantity_measure == 'success'
       return 'Acima do médio & abaixo do máximo'
     else
       return 'Acima do máximo'
