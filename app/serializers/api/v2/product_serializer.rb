@@ -1,5 +1,5 @@
 class Api::V2::ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status, :group_id, :category_id, :quantity_in, :quantity_out, :quantity_inventory, :quantity_measure, :created_at, :updated_at, :category, :group
+  attributes :id, :name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status, :group_id, :category_id, :quantity_in, :quantity_out, :quantity_inventory, :quantity_measure, :quantity_description, :created_at, :updated_at, :category, :group
 
   def quantity_in
     return Detail.joins(:product, :request).where(:product_id => object.id).where("request_type = 'in'").map {
@@ -27,6 +27,18 @@ class Api::V2::ProductSerializer < ActiveModel::Serializer
       return 'success'
     else
       return 'info'
+    end
+  end
+
+  def quantity_description
+    if quantity_measure = 'danger'
+      return 'Abaixo do mínimo'
+    elsif quantity_measure = 'warning'
+      return 'Acima do mínimo & abaixo do médio'
+    elsif quantity_measure = 'success'
+      return 'Acima do médio & abaixo do máximo'
+    else
+      return 'Acima do máximo'
     end
   end
 
