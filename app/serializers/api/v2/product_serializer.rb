@@ -18,7 +18,6 @@ class Api::V2::ProductSerializer < ActiveModel::Serializer
   end
 
   def quantity_measure
-
     if quantity_inventory.to_i <= object.min.to_i
       return 'danger'
     elsif quantity_inventory.to_i > object.min.to_i && quantity_inventory.to_i <= object.med

@@ -1,5 +1,5 @@
 class Api::V2::DetailsController < Api::V2::BaseController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     details = Detail.ransack(params[:q]).result().where(request_id: params[:request_id])

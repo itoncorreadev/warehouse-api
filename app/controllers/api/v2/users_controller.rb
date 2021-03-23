@@ -1,6 +1,6 @@
 class Api::V2::UsersController < Api::V2::BaseController
-  # before_action :authenticate_with_token!, only: [:update, :destroy]
-  # respond_to :json
+  before_action :authenticate_with_token!, only: [:update, :destroy]
+  respond_to :json
 
   def index
     users = User.ransack(params[:q]).result

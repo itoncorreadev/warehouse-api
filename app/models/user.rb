@@ -6,12 +6,14 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
 
-  validates_uniqueness_of :auth_token
   before_create :generate_authentication_token!
 
+  #Associations
   has_many :tasks, dependent: :destroy
   has_many :requests
 
+  #Validations
+  validates_uniqueness_of :auth_token
 
  def info
   "#{email} - #{created_at} - Token: #{Devise.friendly_token}"
