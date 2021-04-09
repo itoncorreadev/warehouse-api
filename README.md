@@ -12,7 +12,7 @@ Consulte **Implantação** para saber como implantar o projeto.
 Docker Desktop
 ```
 
-## 🔧 Instalação do Docker
+## 🔧 Instalação do Docker 🐳
 Siga os passos nos links abaixo para instalação do Docker de acordo com seu sistema operacional:
 
 * [Como instalar o Docker](https://docs.docker.com/engine/installation/)
