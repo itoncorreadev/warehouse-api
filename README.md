@@ -1,4 +1,4 @@
-# 📚 Warehouse API
+# 🏛️ Warehouse API
 Projeto agenda em Ruby on Rails
 
 ## 🚀 Começando
