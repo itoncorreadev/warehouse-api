@@ -1,5 +1,5 @@
-# 🏛️ Warehouse API
-Projeto agenda em Ruby on Rails
+# 🏛️ Warehouse (Backend)
+Projeto agenda com backend Ruby on Rails API e frontend em Angular
 
 ## 🚀 Começando
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
