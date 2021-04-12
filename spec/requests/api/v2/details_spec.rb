@@ -4,8 +4,6 @@ RSpec.describe 'RequestDetail API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:request) { create(:request) }
-  let!(:product) { create(:product) }
   let!(:auth_data) {  user.create_new_auth_token }
   let(:headers) do
     {
@@ -19,10 +17,11 @@ RSpec.describe 'RequestDetail API' do
   end
 
   describe 'GET /requests/:request_id/details' do
+    let(:request) { create(:request) }
 
     context 'when no filter param is sent' do
       before do
-        create_list(:detail, 5)
+        create_list(:detail, 5, request_id: request.id)
         get "/requests/#{request.id}/details", params: {}, headers: headers
       end
 
@@ -36,10 +35,10 @@ RSpec.describe 'RequestDetail API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:details_1) { create(:detail, observation: 'JKL20210201') }
-      let!(:details_2) { create(:detail, observation: 'JKL20210202') }
-      let!(:details_3) { create(:detail, observation: 'JBL20210201') }
-      let!(:details_4) { create(:detail, observation: 'JBL20210202') }
+      let!(:details_1) { create(:detail, observation: 'JKL20210201', request_id: request.id) }
+      let!(:details_2) { create(:detail, observation: 'JKL20210202', request_id: request.id) }
+      let!(:details_3) { create(:detail, observation: 'JBL20210201', request_id: request.id) }
+      let!(:details_4) { create(:detail, observation: 'JBL20210202', request_id: request.id) }
 
       before do
         get "/requests/#{request.id}/details?q[observation_cont]=JKL&q[s]=observation+ASC", params: {}, headers: headers
@@ -57,7 +56,7 @@ RSpec.describe 'RequestDetail API' do
     let(:detail) { create(:detail) }
 
     before do
-      get "/requests/#{request.id}/details/#{detail.id}", params: {}, headers: headers
+      get "/requests/#{detail.request_id}/details/#{detail.id}", params: {}, headers: headers
     end
 
     it 'returns status code 200' do
@@ -70,12 +69,15 @@ RSpec.describe 'RequestDetail API' do
   end
 
   describe 'POST /requests/:request_id/details' do
+    let(:request) { create(:request)}
+    let(:product) { create(:product)}
+
     before do
       post "/requests/#{request.id}/details", params: { detail: detail_params }.to_json, headers: headers
     end
 
     context 'when the params are valid' do
-      let(:detail_params) { attributes_for(:detail) }
+      let(:detail_params) { attributes_for(:detail, request_id: request.id, product_id: product.id) }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -95,7 +97,7 @@ RSpec.describe 'RequestDetail API' do
     end
 
     context 'when the params are invalid' do
-      let(:detail_params) { attributes_for(:detail, quantity: '') }
+      let(:detail_params) { attributes_for(:detail, quantity: nil, request_id: request.id, product_id: product.id) }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -115,7 +117,7 @@ RSpec.describe 'RequestDetail API' do
     let!(:detail) { create(:detail) }
 
     before do
-      put "/requests/#{request.id}/details/#{detail.id}", params: { detail: detail_params }.to_json, headers: headers
+      put "/requests/#{detail.request_id}/details/#{detail.id}", params: { detail: detail_params }.to_json, headers: headers
     end
 
     context 'when the params are valid' do
@@ -135,7 +137,7 @@ RSpec.describe 'RequestDetail API' do
     end
 
     context 'when the params are invalid' do
-      let(:detail_params) { { quantity: '' } }
+      let(:detail_params) { { quantity: nil } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -155,15 +157,15 @@ RSpec.describe 'RequestDetail API' do
     let!(:detail) { create(:detail) }
 
     before do
-      delete "/requests/#{request.id}/details/#{detail.id}"
+      delete "/requests/#{detail.request_id}/details/#{detail.id}"
     end
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'returns status code 401' do
+      expect(response).to have_http_status(401)
     end
 
     it 'removes the detail from the database' do
-      expect { Detail.find(request.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { Detail.find(detail.request_id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

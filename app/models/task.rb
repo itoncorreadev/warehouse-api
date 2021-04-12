@@ -5,5 +5,4 @@ class Task < ApplicationRecord
 
   #Validations
   validates_presence_of :title, :user_id
-
 end

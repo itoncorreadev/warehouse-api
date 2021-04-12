@@ -16,6 +16,7 @@ RSpec.describe User, type: :model do
       user.save!
 
       #Mocks
+      user.generate_authentication_token!
       allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
 
       expect(user.info).to eq("#{user.email} - #{user.created_at} - Token: abc123xyzTOKEN")

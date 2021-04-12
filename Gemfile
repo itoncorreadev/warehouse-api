@@ -7,23 +7,32 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.10.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.11'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-  gem 'rack-cors'
+gem 'rack-cors'
+# Devise is a flexible authentication solution for Rails based on Warden.
+gem 'devise'
+# ActiveModelSerializers is undergoing some renovations.
+gem 'active_model_serializers', '~> 0.10.0'
+# Ransack enables the creation of both simple and advanced search forms for your Ruby on Rails application
+gem 'ransack'
+# OmniAuth is a library that standardizes multi-provider authentication for web applications.
+gem 'omniauth'
+# Simple, multi-client and secure token-based authentication for Rails.
+gem 'devise_token_auth'
+# Centralization of locale data collection for Ruby on Rails.
+gem 'rails-i18n', '~> 5.1'
+# redis-rails provides a full set of stores (Cache, Session, HTTP Cache) for Ruby on Rails. See the main redis-store readme for general guidelines.
+gem 'redis-rails'
+# his gem adds a Redis::Namespace class which can be used to namespace Redis keys.
+gem 'redis-namespace'
+# A high-performance RabbitMQ background processing framework for Ruby.
+gem 'sneakers'
+# Bunny is a RabbitMQ client that focuses on ease of use. It is feature complete, supports all recent RabbitMQ features and does not have any heavyweight dependencies.
+gem 'bunny'
 
 group :production do
   # Use postgresql as the database for Active Record
@@ -33,6 +42,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
   gem 'rspec-rails', '~> 3.5'
 end
 
@@ -56,17 +66,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'devise'
-
-gem 'active_model_serializers', '~> 0.10.0'
-
-gem 'ransack'
-
-gem 'omniauth'
-
-gem 'devise_token_auth'
-
-gem 'rails-i18n', '~> 5.1'
-
-gem 'bunny'

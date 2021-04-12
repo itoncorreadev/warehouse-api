@@ -115,7 +115,7 @@ RSpec.describe 'Task API' do
     end
 
     context 'when the params are valid' do
-      let(:task_params) { { title: 'New task title' } }
+      let(:task_params) { { title: 'New task title', user_id: user.id } }
 
       it 'retuns status code 200' do
         expect(response).to have_http_status(200)
@@ -131,7 +131,7 @@ RSpec.describe 'Task API' do
     end
 
     context 'when the params are invalid' do
-      let(:task_params) { { title: ' ' } }
+      let(:task_params) { { title: ' ', user_id: user.id } }
 
       it 'returns atatus code 422' do
         expect(response).to have_http_status(422)
