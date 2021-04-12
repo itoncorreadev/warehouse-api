@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://www.transparentpng.com/thumb/warehouse/AbAbgi-warehouse-best-png.png"  width="200" height="200"/>
+</p>
+<h1 align="center">Warehouse</h1>
+<br>
+
 # 🏛️ Warehouse (Backend)
 Projeto agenda com backend Ruby on Rails API e frontend em Angular e Monile em NativeScript
 
@@ -48,7 +54,7 @@ docker-compose up -d
 No diretório do projeto rode o comando:
 
 ```
-rspec
+docker-compose run application bundle exec spring rspec
 ```
 
 ## 🛠️ Construído com
