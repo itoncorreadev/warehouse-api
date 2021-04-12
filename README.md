@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://www.transparentpng.com/thumb/warehouse/AbAbgi-warehouse-best-png.png"  width="200" height="200"/>
 </p>
-<h1 align="center">Warehouse API</h1>
+<h1 align="center">Warehouse</h1>
 <br>
 
 # 🏛️ Warehouse (Backend)
