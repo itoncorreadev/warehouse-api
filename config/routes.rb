@@ -1,7 +1,10 @@
 require 'api_version_constraint'
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
+  mount Sidekiq::Web => '/sidekiq'
+  resources :works, only: [:index, :create]
+  
   devise_for :users, only: [:sessions], controllers: { sessions: 'api/v1/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # constraints: { subdomain: 'api' }
@@ -25,7 +28,6 @@ Rails.application.routes.draw do
       resources :requests do
         resources :details, only: [:index, :show, :create, :update, :destroy]
       end
-      resources :sidekiq, only: [:Web]
     end
   end
 end

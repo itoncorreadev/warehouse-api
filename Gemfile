@@ -31,7 +31,7 @@ gem 'redis'
 # his gem adds a Redis::Namespace class which can be used to namespace Redis keys.
 #gem 'redis-namespace'
 # Sidekiq
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.1.3'
 # A high-performance RabbitMQ background processing framework for Ruby.
 # gem 'sneakers'
 # Bunny is a RabbitMQ client that focuses on ease of use. It is feature complete, supports all recent RabbitMQ features and does not have any heavyweight dependencies.
