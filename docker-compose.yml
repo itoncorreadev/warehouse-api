@@ -3,8 +3,8 @@ services:
   database:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=lbv01rrio1950
-      - POSTGRES_USER=postgreslbv
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     ports:
       - '5432:5432'
   application:
