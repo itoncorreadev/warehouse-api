@@ -26,13 +26,16 @@ gem 'devise_token_auth'
 # Centralization of locale data collection for Ruby on Rails.
 gem 'rails-i18n', '~> 5.1'
 # redis-rails provides a full set of stores (Cache, Session, HTTP Cache) for Ruby on Rails. See the main redis-store readme for general guidelines.
-gem 'redis-rails'
+#gem 'redis-rails'
+gem 'redis'
 # his gem adds a Redis::Namespace class which can be used to namespace Redis keys.
-gem 'redis-namespace'
+#gem 'redis-namespace'
+# Sidekiq
+gem 'sidekiq'
 # A high-performance RabbitMQ background processing framework for Ruby.
-gem 'sneakers'
+# gem 'sneakers'
 # Bunny is a RabbitMQ client that focuses on ease of use. It is feature complete, supports all recent RabbitMQ features and does not have any heavyweight dependencies.
-gem 'bunny'
+# gem 'bunny'
 
 group :production do
   # Use postgresql as the database for Active Record
@@ -48,15 +51,15 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.5.3'
-  gem 'factory_girl_rails'
-  #gem 'factory_bot_rails'
+  #gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
   # Use postgresql as the database for Active Record
-  gem 'pg'
+  #gem 'pg'
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

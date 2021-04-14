@@ -27,5 +27,7 @@ module WarehouseApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.i18n.default_locale = :'pt-BR'
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

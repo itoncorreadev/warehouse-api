@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :requests do
         resources :details, only: [:index, :show, :create, :update, :destroy]
       end
+      resources :sidekiq, only: [:Web]
     end
   end
 end

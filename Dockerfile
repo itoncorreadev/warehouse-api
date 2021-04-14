@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.8
 
 ARG RAILS_ENV
 ARG NODE_ENV

@@ -20,8 +20,8 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgreslbv
-  password: lbv01rrio1950
+  username: postgres
+  password: postgres
   host: database
   port: 5432
 
