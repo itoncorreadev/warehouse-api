@@ -3,8 +3,10 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
-  resources :works, only: [:index, :create]
-  
+  get 'taskings/data', to: 'taskings#data'
+  post 'taskings/upload', to: 'taskings#upload'
+  post 'taskings/destroy', to: 'taskings#destroy'
+
   devise_for :users, only: [:sessions], controllers: { sessions: 'api/v1/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # constraints: { subdomain: 'api' }
