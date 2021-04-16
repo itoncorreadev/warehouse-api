@@ -1,5 +1,5 @@
 class Api::V2::TasksController < Api::V2::BaseController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     tasks = Task.ransack(params[:q]).result
