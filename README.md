@@ -28,10 +28,16 @@ Siga os passos nos links abaixo para instalação do Docker de acordo com seu si
 * [Como instalar o Docker Compose](https://docs.docker.com/compose/)
 
 ## ⬇️ Clonar o projeto
-obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste:
+Para obter uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste execute o comando abaixo:
 
 ```
 git clone https://github.com/cleitoncorreas/warehouse-api.git
+```
+
+logo após o download, entre na pasta do projeto
+
+```
+cd warehouse-api
 ```
 
 ## ⚙️ Build do Projeto
@@ -77,6 +83,8 @@ docker-compose run application bundle exec spring rspec
 * [Gem Rspec Rails](https://github.com/rspec/rspec-rails)
 * [Gem Shouda Matchers](https://github.com/thoughtbot/shoulda-matchers)
 * [Gem Factory Bot](https://github.com/thoughtbot/factory_bot)
+* [Gem Redis](https://github.com/redis/redis-rb/)
+* [Gem Sidekiq](https://github.com/mperham/sidekiq)
 
 ## ✒️ Autores
 
