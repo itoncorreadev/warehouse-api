@@ -7,7 +7,7 @@
 # 🏛️ Warehouse (Backend)
 Projeto agenda com backend Ruby on Rails API e frontend em Angular e Monile em NativeScript
 
-## 🚀 Heroku
+## 🌐 Heroku
 https://warehouse-angular-web.herokuapp.com
 
 ## 🚀 Começando
@@ -26,6 +26,13 @@ Siga os passos nos links abaixo para instalação do Docker de acordo com seu si
 
 * [Como instalar o Docker](https://docs.docker.com/engine/installation/)
 * [Como instalar o Docker Compose](https://docs.docker.com/compose/)
+
+## ⬇️ Clonar o projeto
+obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste:
+
+```
+git clone https://github.com/cleitoncorreas/warehouse-api.git
+```
 
 ## ⚙️ Build do Projeto
 Para fazer o Build de todos os nossos containers basta rodar (dentro do projeto):
