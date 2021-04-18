@@ -38,6 +38,7 @@ services:
     ports:
       - '3000:3000'
       - '3009:3009'
+    command: rake db:drop db:create db:migrate db:seed db:test:prepare
     volumes:
       - ./:/app
     depends_on:
