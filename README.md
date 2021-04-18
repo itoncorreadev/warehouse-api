@@ -64,8 +64,21 @@ Para rodar em background utilize o _-d_ após i _up_:
 ```
 docker-compose up -d
 ```
+
+Containers Postgres, Redis, Sidekiq e da Aplicação
+
 <p align="center">
-  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/3eb3422a4aa3755dfda42d92351e962069a1e6d1/Images/docker-containers.png"  />
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/3eb3422a4aa3755dfda42d92351e962069a1e6d1/Images/docker-containers.png"/>
+</p>
+
+## 📉 Monitoramento Sidekiq
+
+```
+http://localhost:3000/sidekiq
+```
+
+<p align="center">
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/3eb3422a4aa3755dfda42d92351e962069a1e6d1/Images/Sidekiq.png"/>
 </p>
 
 
