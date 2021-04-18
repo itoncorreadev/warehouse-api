@@ -20,7 +20,7 @@ services:
       - 'database'
       - 'redis'
     build: .
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq config/sidekiq.yml
     volumes:
       - '.:/app'
       - '/app/tmp' # don't mount tmp directory

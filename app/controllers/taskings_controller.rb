@@ -8,23 +8,23 @@ class TaskingsController < ApplicationController
         upload
       end
     end
-  
+
     def data
     end
-  
+
     def upload
       csv_file = File.join(Rails.root,'db','task.csv')
-      AddTaskWorker.set(queue: :tasks).perform_async(csv_file)
+      AddTaskWorker.perform_async(csv_file)
       redirect_to api_v2_tasks_path
     end
-  
+
     def destroy
-      RemoveTaskWorker.set(queue: :tasks).perform_async
+      RemoveTaskWorker.perform_async
       redirect_to api_v2_tasks_path
     end
-  
+
     private
-  
+
     def set_tasking
       @task = Task.all
     end
