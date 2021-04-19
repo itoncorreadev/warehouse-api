@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/4f8429a4aeb5426d89d7ae703ede280d06e8df20/Projetos/Warehouse/Logo/logo.png"  width="200" height="200"/>
 </p>
-<h1 align="center">Warehouse</h1>
+
 <br>
 
 # 🏛️ Warehouse (Backend)
