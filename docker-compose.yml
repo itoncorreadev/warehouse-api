@@ -14,7 +14,6 @@ services:
       - '6379:6379'
     volumes:
       - '.:/data'
-
   sidekiq:
     depends_on:
       - 'database'
@@ -38,7 +37,6 @@ services:
     ports:
       - '3000:3000'
       - '3009:3009'
-    command: rake db:drop db:create db:migrate db:seed db:test:prepare
     volumes:
       - ./:/app
     depends_on:
@@ -46,7 +44,6 @@ services:
       - redis
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/0
-
 volumes:
   redis:
   postgres:

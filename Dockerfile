@@ -25,8 +25,10 @@ WORKDIR /app
 COPY . .
 RUN bundle install && \
     npm cache verify && \
-    yarn install
+    yarn install && \
+    rails dev:setup
 CMD bundle install && \
     npm cache verify && \
     yarn install && \
+    rails dev:setup && \
     rm -Rf /app/tmp/pids/ && bundle exec rails server -b 0.0.0.0 -p 3000
