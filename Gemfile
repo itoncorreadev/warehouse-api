@@ -27,6 +27,7 @@ gem 'devise_token_auth'
 gem 'rails-i18n', '~> 5.1'
 # redis-rails provides a full set of stores (Cache, Session, HTTP Cache) for Ruby on Rails. See the main redis-store readme for general guidelines.
 #gem 'redis-rails'
+# Redis
 gem 'redis'
 # his gem adds a Redis::Namespace class which can be used to namespace Redis keys.
 #gem 'redis-namespace'
@@ -36,6 +37,8 @@ gem 'sidekiq', '~> 6.1.3'
 # gem 'sneakers'
 # Bunny is a RabbitMQ client that focuses on ease of use. It is feature complete, supports all recent RabbitMQ features and does not have any heavyweight dependencies.
 # gem 'bunny'
+#Manager Procfile
+gem 'foreman'
 
 group :production do
   # Use postgresql as the database for Active Record
