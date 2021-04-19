@@ -3,7 +3,7 @@
 </p>
 <br>
 <p align="center">
-  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/140796a859bb33ced49f2a73e819c53a912a94f9/Projetos/Warehouse/Capa/capa.png"/>
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/085d669c939230798e87ae925119b4c2f4888b80/Projetos/Warehouse/Capa/capa.png"/>
 </p>
 
 # 🏛️ Warehouse (Backend)
