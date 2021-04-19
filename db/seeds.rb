@@ -88,3 +88,10 @@ Supplier.create([
     comment: 'Fornecedor para requisições internas'
   }
 ])
+
+User.create([
+  {
+    email: 'guest@guest.com',
+    password: 'guest'
+  }
+])
