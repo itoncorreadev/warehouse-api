@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/4f8429a4aeb5426d89d7ae703ede280d06e8df20/Projetos/Warehouse/Logo/logo.png"  width="200" height="200"/>
-</p>
-<br>
-<p align="center">
   <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/4fa53ca31d1bf2a525be593615104f1bbea71da9/Projetos/Warehouse/Capa/capa-warehouse.png"/>
 </p>
 
