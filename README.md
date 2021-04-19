@@ -69,6 +69,16 @@ Containers Postgres, Redis, Sidekiq e da Aplicação
   <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/3eb3422a4aa3755dfda42d92351e962069a1e6d1/Images/docker-containers.png"/>
 </p>
 
+## 🌐 Home
+
+```
+http://localhost:4200
+```
+
+<p align="center">
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/2e29a3907035f8d540f5258ffeed8016d52ca514/Projetos/Warehouse/Backend/home.png"/>
+</p>
+
 ## 📉 Monitoramento Sidekiq
 
 ```
