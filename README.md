@@ -72,7 +72,7 @@ Containers Postgres, Redis, Sidekiq e da Aplicação
 ## 🌐 Home
 
 ```
-http://localhost:4200
+http://localhost:3000
 ```
 
 <p align="center">
