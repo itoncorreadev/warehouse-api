@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="https://www.transparentpng.com/thumb/warehouse/AbAbgi-warehouse-best-png.png"  width="200" height="200"/>
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/4fa53ca31d1bf2a525be593615104f1bbea71da9/Projetos/Warehouse/Capa/capa-warehouse.png"/>
 </p>
-<h1 align="center">Warehouse</h1>
-<br>
 
 # 🏛️ Warehouse (Backend)
 Projeto agenda com backend Ruby on Rails API e frontend em Angular e Monile em NativeScript
@@ -69,6 +67,16 @@ Containers Postgres, Redis, Sidekiq e da Aplicação
 
 <p align="center">
   <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/3eb3422a4aa3755dfda42d92351e962069a1e6d1/Images/docker-containers.png"/>
+</p>
+
+## 🌐 Home
+
+```
+http://localhost:3000
+```
+
+<p align="center">
+  <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/2e29a3907035f8d540f5258ffeed8016d52ca514/Projetos/Warehouse/Backend/home.png"/>
 </p>
 
 ## 📉 Monitoramento Sidekiq
