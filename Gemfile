@@ -42,7 +42,7 @@ gem 'foreman'
 
 group :production do
   # Use postgresql as the database for Active Record
-  #gem 'pg'
+  gem 'pg'
 end
 
 group :development, :test do

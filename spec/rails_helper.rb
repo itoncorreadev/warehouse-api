@@ -9,7 +9,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'database_cleaner'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'shoulda-matchers'
 require 'shoulda/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -53,7 +53,7 @@ RSpec.configure do |config|
 
   #config.include(Shoulda::Matchers::ActiveModel, type: :model)
   #config.include(Shoulda::Matchers::ActiveRecord, type: :model)
-  config.include(FactoryGirl::Syntax::Methods)
+  config.include(FactoryBot::Syntax::Methods)
   config.include(RequestSpecHelper)
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

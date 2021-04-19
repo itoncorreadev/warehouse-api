@@ -1,11 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :request do
     date { Faker::Date.forward }
-    request_type 'in'
+    request_type {'in'}
     description { Faker::Lorem.sentence }
-    document_type 'nf'
+    document_type {'nf'}
     document_code { Faker::Number.number(digits: 10) }
-    status false
+    status {"false"}
     supplier
     department
     user

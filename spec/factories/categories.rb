@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :category do
-    description 'Sabão em pó'
-    status true
+    description { Faker::Lorem.sentence }
+    status {"true"}
   end
 end

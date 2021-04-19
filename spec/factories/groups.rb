@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :group do
-    name 'Frutas'
-    status true
+    name { Faker::Food.fruits}
+    status { "true"  }
   end
 end
