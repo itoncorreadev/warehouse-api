@@ -79,7 +79,7 @@ http://localhost:3000
   <img src="https://github.com/cleitoncorreas/cleitoncorreas/blob/2e29a3907035f8d540f5258ffeed8016d52ca514/Projetos/Warehouse/Backend/home.png"/>
 </p>
 
-## 📉 Monitoramento Sidekiq
+## 📉 Jobs Redis/Sidekiq
 
 ```
 http://localhost:3000/sidekiq
