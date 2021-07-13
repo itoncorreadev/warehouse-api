@@ -7,6 +7,7 @@ Projeto agenda com backend Ruby on Rails API e frontend em Angular e Monile em N
 
 ## 🌐 Heroku
 https://warehouse-angular-web.herokuapp.com
+https://warehouse-angular-api.herokuapp.com
 
 ## 🚀 Começando
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
