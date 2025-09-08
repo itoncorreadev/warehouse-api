@@ -1,48 +1,54 @@
-class Api::V2::TasksController < Api::V2::BaseController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  def index
-    tasks = Task.ransack(params[:q]).result
+module Api
+  module V2
+    class TasksController < Api::V2::BaseController
+      before_action :authenticate_user!
 
-    render json: tasks, status: 200
-  end
+      def index
+        tasks = Task.ransack(params[:q]).result
 
-  def show
-    task = Task.find(params[:id])
+        render json: tasks, status: 200
+      end
 
-    render json: task, status: 200
-  end
+      def show
+        task = Task.find(params[:id])
 
-  def create
-    task = current_user.tasks.build(task_params)
+        render json: task, status: 200
+      end
 
-    if task.save
-      render json: task, status: 201
-    else
-      render json: { errors: task.errors }, status: 422
+      def create
+        task = current_user.tasks.build(task_params)
+
+        if task.save
+          render json: task, status: 201
+        else
+          render json: { errors: task.errors }, status: 422
+        end
+      end
+
+      def update
+        User.find(task_params[:user_id])
+        task = Task.find(params[:id])
+
+        if task.update_attributes(task_params)
+          render json: task, status: 200
+        else
+          render json: { errors: task.errors }, status: 422
+        end
+      end
+
+      def destroy
+        task = current_user.tasks.find(params[:id])
+        task.destroy
+        head 204
+      end
+
+      private
+
+      def task_params
+        params.require(:task).permit(:title, :description, :deadline, :done, :user_id)
+      end
     end
-  end
-
-  def update
-    user = User.find(task_params[:user_id])
-    task = Task.find(params[:id])
-
-    if task.update_attributes(task_params)
-      render json: task, status: 200
-    else
-      render json: { errors: task.errors }, status: 422
-    end
-  end
-
-  def destroy
-    task = current_user.tasks.find(params[:id])
-    task.destroy
-    head 204
-  end
-
-  private
-
-  def task_params
-    params.require(:task).permit(:title, :description, :deadline, :done, :user_id)
   end
 end

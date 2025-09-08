@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Product API' do
@@ -6,7 +8,7 @@ RSpec.describe 'Product API' do
   let!(:user) { create(:user) }
   let!(:group) { create(:group) }
   let!(:category) { create(:category) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -19,7 +21,6 @@ RSpec.describe 'Product API' do
   end
 
   describe 'GET /products' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:product, 5)
@@ -36,10 +37,8 @@ RSpec.describe 'Product API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:products_1) { create(:product, name: 'Apple Gala') }
-      let!(:products_2) { create(:product, name: 'Orange Gala') }
-      let!(:products_3) { create(:product, name: 'Whater Blue') }
-      let!(:products_4) { create(:product, name: 'Whater Pure') }
+      let!(:products_one) { create(:product, name: 'Apple Gala') }
+      let!(:products_two) { create(:product, name: 'Orange Gala') }
 
       before do
         get '/products?q[name_cont]=gala&q[s]=name+ASC', params: {}, headers: headers
@@ -48,7 +47,7 @@ RSpec.describe 'Product API' do
       it 'return only the products matching and in the correct order' do
         returned_product_names = json_body[:data].map { |t| t[:attributes][:name] }
 
-        expect(returned_product_names).to eq([products_1.name, products_2.name])
+        expect(returned_product_names).to eq([products_one.name, products_two.name])
       end
     end
   end
@@ -84,7 +83,7 @@ RSpec.describe 'Product API' do
       end
 
       it 'returns the in database' do
-        expect( Product.find_by(name: product_params[:name]) ).not_to be_nil
+        expect(Product.find_by(name: product_params[:name])).not_to be_nil
       end
 
       it 'returns the json for created product' do
@@ -108,7 +107,7 @@ RSpec.describe 'Product API' do
       end
 
       it 'does not save the product in the database' do
-        expect( Product.find_by(name: product_params[:name]) ).to be_nil
+        expect(Product.find_by(name: product_params[:name])).to be_nil
       end
 
       it 'returns the json error for name' do
@@ -136,7 +135,7 @@ RSpec.describe 'Product API' do
       end
 
       it 'updates the task in the database' do
-        expect( Product.find_by(name: product_params[:name]) ).not_to be_nil
+        expect(Product.find_by(name: product_params[:name])).not_to be_nil
       end
     end
 
@@ -152,11 +151,9 @@ RSpec.describe 'Product API' do
       end
 
       it 'does not update the product in the database' do
-        expect( Product.find_by(name: product_params[:name])).to be_nil
+        expect(Product.find_by(name: product_params[:name])).to be_nil
       end
-
     end
-
   end
 
   describe 'DELETE /products/:id' do
@@ -174,5 +171,4 @@ RSpec.describe 'Product API' do
       expect { Product.find(product.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
 end

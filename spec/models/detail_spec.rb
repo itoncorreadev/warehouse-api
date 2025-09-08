@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Detail, type: :model do
@@ -13,5 +15,4 @@ RSpec.describe Detail, type: :model do
   it { is_expected.to respond_to(:observation) }
   it { is_expected.to respond_to(:product_id) }
   it { is_expected.to respond_to(:request_id) }
-
 end

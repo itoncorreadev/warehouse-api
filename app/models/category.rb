@@ -1,10 +1,8 @@
-class Category < ApplicationRecord
+# frozen_string_literal: true
 
-  # Associations
+class Category < ApplicationRecord
   has_many :products
   has_many :groups, through: :products
 
-  # Validations
   validates_presence_of :description
-
 end

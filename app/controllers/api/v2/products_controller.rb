@@ -1,54 +1,60 @@
-class Api::V2::ProductsController < Api::V2::BaseController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  def index
-    products = Product.ransack(params[:q]).result
+module Api
+  module V2
+    class ProductsController < Api::V2::BaseController
+      before_action :authenticate_user!
 
-    render json: products, status: 200
-  end
+      def index
+        products = Product.ransack(params[:q]).result
 
-  def show
-    product = Product.find(params[:id])
+        render json: products, status: 200
+      end
 
-    render json: product, status: 200
-  end
+      def show
+        product = Product.find(params[:id])
 
-  def create
-    group = Group.first
-    category = Category.first
+        render json: product, status: 200
+      end
 
-    product = Product.new(product_params)
+      def create
+        group = Group.first
+        category = Category.first
 
-    product.category = category
-    product.group = group
+        product = Product.new(product_params)
 
-    if product.save
-      render json: product, status: 201
-    else
-      render json: { errors: product.errors }, status: 422
+        product.category = category
+        product.group = group
+
+        if product.save
+          render json: product, status: 201
+        else
+          render json: { errors: product.errors }, status: 422
+        end
+      end
+
+      def update
+        product = Product.find(params[:id])
+
+        if product.update_attributes(product_params)
+          render json: product, status: 200
+        else
+          render json: { errors: product.errors }, status: 422
+        end
+      end
+
+      def destroy
+        product = Product.find(params[:id])
+        product.destroy
+        head 204
+      end
+
+      private
+
+      def product_params
+        params.require(:product).permit(:name, :description, :code, :product_type, :measure, :min, :med, :max, :location,
+                                        :status, :group_id, :category_id)
+      end
     end
   end
-
-  def update
-    product = Product.find(params[:id])
-
-    if product.update_attributes(product_params)
-      render json: product, status: 200
-    else
-      render json: { errors: product.errors }, status: 422
-    end
-  end
-
-  def destroy
-    product = Product.find(params[:id])
-    product.destroy
-    head 204
-  end
-
-  private
-
-  def product_params
-    params.require(:product).permit(:name, :description, :code, :product_type, :measure, :min, :med, :max, :location, :status, :group_id, :category_id)
-  end
-
 end

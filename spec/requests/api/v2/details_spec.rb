@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'RequestDetail API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -35,10 +37,8 @@ RSpec.describe 'RequestDetail API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:details_1) { create(:detail, observation: 'JKL20210201', request_id: request.id) }
-      let!(:details_2) { create(:detail, observation: 'JKL20210202', request_id: request.id) }
-      let!(:details_3) { create(:detail, observation: 'JBL20210201', request_id: request.id) }
-      let!(:details_4) { create(:detail, observation: 'JBL20210202', request_id: request.id) }
+      let!(:details_one) { create(:detail, observation: 'JKL20210201', request_id: request.id) }
+      let!(:details_two) { create(:detail, observation: 'JKL20210202', request_id: request.id) }
 
       before do
         get "/requests/#{request.id}/details?q[observation_cont]=JKL&q[s]=observation+ASC", params: {}, headers: headers
@@ -47,7 +47,7 @@ RSpec.describe 'RequestDetail API' do
       it 'return only the products matching and in the correct order' do
         returned_detail_observation = json_body[:data].map { |t| t[:attributes][:observation] }
 
-        expect(returned_detail_observation).to eq([details_1.observation, details_2.observation])
+        expect(returned_detail_observation).to eq([details_one.observation, details_two.observation])
       end
     end
   end
@@ -69,8 +69,8 @@ RSpec.describe 'RequestDetail API' do
   end
 
   describe 'POST /requests/:request_id/details' do
-    let(:request) { create(:request)}
-    let(:product) { create(:product)}
+    let(:request) { create(:request) }
+    let(:product) { create(:product) }
 
     before do
       post "/requests/#{request.id}/details", params: { detail: detail_params }.to_json, headers: headers
@@ -117,7 +117,8 @@ RSpec.describe 'RequestDetail API' do
     let!(:detail) { create(:detail) }
 
     before do
-      put "/requests/#{detail.request_id}/details/#{detail.id}", params: { detail: detail_params }.to_json, headers: headers
+      put "/requests/#{detail.request_id}/details/#{detail.id}", params: { detail: detail_params }.to_json,
+                                                                 headers: headers
     end
 
     context 'when the params are valid' do

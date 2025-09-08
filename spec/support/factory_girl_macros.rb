@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # module FactoryGirl::Syntax::Methods
 #   def nested_attributes_for(*args)
 #     attributes = attributes_for(*args)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Sessions API', type: :request do
@@ -53,7 +55,7 @@ RSpec.describe 'Sessions API', type: :request do
     end
 
     it 'changes the user auth token' do
-      expect( User.find_by(auth_token: auth_token) ).to be_nil
+      expect(User.find_by(auth_token: auth_token)).to be_nil
     end
   end
 end

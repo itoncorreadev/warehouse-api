@@ -1,10 +1,10 @@
-class Detail < ApplicationRecord
+# frozen_string_literal: true
 
-  #Associations
+class Detail < ApplicationRecord
+ 
   belongs_to :product
   belongs_to :request
 
-  # Validations
-  validates_presence_of :product_id, :request_id, :quantity
 
+  validates_presence_of :product_id, :request_id, :quantity
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Supplier API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -17,7 +19,6 @@ RSpec.describe 'Supplier API' do
   end
 
   describe 'GET /suppliers' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:supplier, 5)
@@ -34,10 +35,8 @@ RSpec.describe 'Supplier API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:notebook_supplier_1) { create(:supplier, description: 'Supermarket') }
-      let!(:notebook_supplier_2) { create(:supplier, description: 'Multimarket') }
-      let!(:other_supplier_1) { create(:supplier, description: 'Shopping') }
-      let!(:other_supplier_2) { create(:supplier, description: 'MiniShopping') }
+      let!(:notebook_supplier_one) { create(:supplier, description: 'Supermarket') }
+      let!(:notebook_supplier_two) { create(:supplier, description: 'Multimarket') }
 
       before do
         get '/suppliers?q[description_cont]=mark&q[s]=description+ASC', params: {}, headers: headers
@@ -46,7 +45,7 @@ RSpec.describe 'Supplier API' do
       it 'returns only the suppliers matching and in the correct order' do
         returned_supplier_descriptions = json_body[:data].map { |t| t[:attributes][:description] }
 
-        expect(returned_supplier_descriptions).to eq([notebook_supplier_2.description, notebook_supplier_1.description])
+        expect(returned_supplier_descriptions).to eq([notebook_supplier_two.description, notebook_supplier_one.description])
       end
     end
   end
@@ -54,7 +53,7 @@ RSpec.describe 'Supplier API' do
   describe 'GET /suppliers/:id' do
     let(:supplier) { create(:supplier) }
 
-    before { get "/suppliers/#{supplier.id}", params: {},  headers: headers }
+    before { get "/suppliers/#{supplier.id}", params: {}, headers: headers }
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
@@ -101,7 +100,6 @@ RSpec.describe 'Supplier API' do
         expect(json_body[:errors]).to have_key(:description)
       end
     end
-
   end
 
   describe 'PUT /suppliers/:id' do
@@ -159,6 +157,4 @@ RSpec.describe 'Supplier API' do
       expect { Supplier.find(supplier.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
-
 end

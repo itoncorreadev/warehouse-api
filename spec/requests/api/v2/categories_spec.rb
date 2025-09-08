@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Category API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -17,7 +19,6 @@ RSpec.describe 'Category API' do
   end
 
   describe 'GET /categories' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:category, 5)
@@ -34,10 +35,8 @@ RSpec.describe 'Category API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:category_1) { create(:category, description: 'Soap 70%') }
-      let!(:category_2) { create(:category, description: 'Alcool 70%') }
-      let!(:category_3) { create(:category, description: 'Papper') }
-      let!(:category_4) { create(:category, description: 'Clean') }
+      let!(:category_one) { create(:category, description: 'Soap 70%') }
+      let!(:category_two) { create(:category, description: 'Alcool 70%') }
 
       before do
         get '/categories?q[description_cont]=70&q[s]=description+ASC', params: {}, headers: headers
@@ -46,7 +45,7 @@ RSpec.describe 'Category API' do
       it 'returns only the categories matching and in the correct order' do
         returned_category_description = json_body[:data].map { |t| t[:attributes][:description] }
 
-        expect(returned_category_description).to eq([category_2.description, category_1.description])
+        expect(returned_category_description).to eq([category_two.description, category_one.description])
       end
     end
   end
@@ -55,7 +54,7 @@ RSpec.describe 'Category API' do
     let(:category) { create(:category) }
 
     before do
-      get "/categories/#{category.id}",  params: {}, headers: headers
+      get "/categories/#{category.id}", params: {}, headers: headers
     end
 
     it 'return status code 200' do
@@ -80,7 +79,7 @@ RSpec.describe 'Category API' do
       end
 
       it 'returns the category in database' do
-        expect( Category.find_by(description: category_params[:description]) ).not_to be_nil
+        expect(Category.find_by(description: category_params[:description])).not_to be_nil
       end
 
       it 'returns the json for create category' do
@@ -96,7 +95,7 @@ RSpec.describe 'Category API' do
       end
 
       it 'does not save the category in the database' do
-        expect( Category.find_by(description: category_params[:description]) ).to be_nil
+        expect(Category.find_by(description: category_params[:description])).to be_nil
       end
 
       it 'returns the json error for category' do
@@ -157,7 +156,7 @@ RSpec.describe 'Category API' do
     end
 
     it 'removes the category from the database' do
-      expect{ Category.find(category.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { Category.find(category.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

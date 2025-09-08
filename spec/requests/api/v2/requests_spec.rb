@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Request API' do
@@ -6,7 +8,7 @@ RSpec.describe 'Request API' do
   let!(:user) { create(:user) }
   let!(:department) { create(:department) }
   let!(:supplier) { create(:supplier) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -19,11 +21,10 @@ RSpec.describe 'Request API' do
   end
 
   describe 'GET /requests' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:request, 5)
-        get "/requests", params: {}, headers: headers
+        get '/requests', params: {}, headers: headers
       end
 
       it 'returns status code 200' do
@@ -36,19 +37,17 @@ RSpec.describe 'Request API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:requests_1) { create(:request, description: 'JKL20210201') }
-      let!(:requests_2) { create(:request, description: 'JKL20210202') }
-      let!(:requests_3) { create(:request, description: 'JBL20210201') }
-      let!(:requests_4) { create(:request, description: 'JBL20210202') }
+      let!(:requests_one) { create(:request, description: 'JKL20210201') }
+      let!(:requests_two) { create(:request, description: 'JKL20210202') }
 
       before do
-        get "/requests?q[description_cont]=JKL&q[s]=description+ASC", params: {}, headers: headers
+        get '/requests?q[description_cont]=JKL&q[s]=description+ASC', params: {}, headers: headers
       end
 
       it 'return only the products matching and in the correct order' do
         returned_request_description = json_body[:data].map { |t| t[:attributes][:description] }
 
-        expect(returned_request_description).to eq([requests_1.description, requests_2.description])
+        expect(returned_request_description).to eq([requests_one.description, requests_two.description])
       end
     end
   end
@@ -71,7 +70,7 @@ RSpec.describe 'Request API' do
 
   describe 'POST /requests' do
     before do
-      post "/requests", params: { request: request_params }.to_json, headers: headers
+      post '/requests', params: { request: request_params }.to_json, headers: headers
     end
 
     context 'when the params are valid' do
@@ -142,14 +141,13 @@ RSpec.describe 'Request API' do
       end
 
       it 'does not update the request in the database' do
-        expect( Request.find_by(description: request_params[:description])).to be_nil
+        expect(Request.find_by(description: request_params[:description])).to be_nil
       end
 
       it 'returns the json error for document' do
         expect(json_body[:errors]).to have_key(:description)
       end
     end
-
   end
 
   describe 'DELETE /requests/:id' do

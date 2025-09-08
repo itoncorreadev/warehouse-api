@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Sessions API', type: :request do
@@ -60,8 +62,8 @@ RSpec.describe 'Sessions API', type: :request do
 
     it 'changes the user auth token' do
       user.reload
-      expect( user.valid_token?(auth_data['access-token'], auth_data['client']) ).to eq(false)
-      #expect(user).not_to be_valid_token(auth_data['access-token'], auth_data['client'])
+      expect(user.valid_token?(auth_data['access-token'], auth_data['client'])).to eq(false)
+      # expect(user).not_to be_valid_token(auth_data['access-token'], auth_data['client'])
     end
   end
 end

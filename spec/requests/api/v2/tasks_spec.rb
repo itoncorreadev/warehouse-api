@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Task API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -17,7 +19,6 @@ RSpec.describe 'Task API' do
   end
 
   describe 'GET /tasks' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:task, 5, user_id: user.id)
@@ -34,10 +35,10 @@ RSpec.describe 'Task API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:notebook_task_1) { create(:task, title: 'Check if the notebook is broken', user_id: user.id) }
-      let!(:notebook_task_2) { create(:task, title: 'Buy a new notebook', user_id: user.id) }
-      let!(:other_task_1) { create(:task, title: 'Fix the door', user_id: user.id) }
-      let!(:other_task_2) { create(:task, title: 'Buy a new car', user_id: user.id) }
+      let!(:notebook_task_one) { create(:task, title: 'Check if the notebook is broken', user_id: user.id) }
+      let!(:notebook_task_two) { create(:task, title: 'Buy a new notebook', user_id: user.id) }
+      let!(:other_task_one) { create(:task, title: 'Fix the door', user_id: user.id) }
+      let!(:other_task_two) { create(:task, title: 'Buy a new car', user_id: user.id) }
 
       before do
         get '/tasks?q[title_cont]=note&q[s]=title+ASC', params: {}, headers: headers
@@ -46,13 +47,13 @@ RSpec.describe 'Task API' do
       it 'returns only the tasks matching and in the correct order' do
         returned_task_titles = json_body[:data].map { |t| t[:attributes][:title] }
 
-        expect(returned_task_titles).to eq([notebook_task_2.title, notebook_task_1.title])
+        expect(returned_task_titles).to eq([notebook_task_two.title, notebook_task_one.title])
       end
     end
   end
 
   describe 'GET /tasks/:id' do
-    let(:task) { create(:task, user_id: user.id)}
+    let(:task) { create(:task, user_id: user.id) }
 
     before { get "/tasks/#{task.id}", params: {}, headers: headers }
 
@@ -78,7 +79,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'retuns the task in database' do
-        expect( Task.find_by(title: task_params[:title]) ).not_to be_nil
+        expect(Task.find_by(title: task_params[:title])).not_to be_nil
       end
 
       it 'retuns the json for created task' do
@@ -98,7 +99,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'does not save the task in the database' do
-        expect( Task.find_by(title: task_params[:title]) ).to be_nil
+        expect(Task.find_by(title: task_params[:title])).to be_nil
       end
 
       it 'returns the json error for title' do
@@ -126,7 +127,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'updates the task in the database' do
-        expect( Task.find_by(title: task_params[:title]) ).not_to be_nil
+        expect(Task.find_by(title: task_params[:title])).not_to be_nil
       end
     end
 
@@ -142,11 +143,9 @@ RSpec.describe 'Task API' do
       end
 
       it 'does not update the task in the database' do
-        expect( Task.find_by(title: task_params[:title])).to be_nil
+        expect(Task.find_by(title: task_params[:title])).to be_nil
       end
-
     end
-
   end
 
   describe 'DELETE /tasks/:id' do

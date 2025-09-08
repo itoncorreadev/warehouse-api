@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20210212204217) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.datetime "date",          default: '2021-04-19 05:40:28'
+    t.datetime "date",          default: '2025-09-07 00:46:23'
     t.string   "request_type"
     t.string   "description"
     t.string   "document_type", default: "NF"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20210212204217) do
     t.string   "title"
     t.text     "description"
     t.boolean  "done",        default: false
-    t.datetime "deadline",    default: '2021-04-19 05:40:27'
+    t.datetime "deadline",    default: '2025-09-07 00:46:23'
     t.integer  "user_id"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false

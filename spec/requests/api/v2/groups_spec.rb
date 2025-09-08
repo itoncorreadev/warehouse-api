@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Group API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -17,7 +19,6 @@ RSpec.describe 'Group API' do
   end
 
   describe 'GET /groups' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:group, 5)
@@ -34,10 +35,8 @@ RSpec.describe 'Group API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:group_1) { create(:group, name: 'Supermarket') }
-      let!(:group_2) { create(:group, name: 'Multimarket') }
-      let!(:group_3) { create(:group, name: 'Shopping') }
-      let!(:group_4) { create(:group, name: 'MiniShopping') }
+      let!(:group_one) { create(:group, name: 'Supermarket') }
+      let!(:group_two) { create(:group, name: 'Multimarket') }
 
       before do
         get '/groups?q[name_cont]=mark&q[s]=name+ASC', params: {}, headers: headers
@@ -46,7 +45,7 @@ RSpec.describe 'Group API' do
       it 'returns only the groups matching and in the correct order' do
         returned_group_name = json_body[:data].map { |t| t[:attributes][:name] }
 
-        expect(returned_group_name).to eq([group_2.name, group_1.name])
+        expect(returned_group_name).to eq([group_two.name, group_one.name])
       end
     end
   end
@@ -55,7 +54,7 @@ RSpec.describe 'Group API' do
     let(:group) { create(:group) }
 
     before do
-      get "/groups/#{group.id}",  params: {}, headers: headers
+      get "/groups/#{group.id}", params: {}, headers: headers
     end
 
     it 'return status code 200' do
@@ -80,7 +79,7 @@ RSpec.describe 'Group API' do
       end
 
       it 'returns the group in database' do
-        expect( Group.find_by(name: group_params[:name]) ).not_to be_nil
+        expect(Group.find_by(name: group_params[:name])).not_to be_nil
       end
 
       it 'returns the json for create group' do
@@ -96,7 +95,7 @@ RSpec.describe 'Group API' do
       end
 
       it 'does not save the group in the database' do
-        expect( Group.find_by(name: group_params[:name]) ).to be_nil
+        expect(Group.find_by(name: group_params[:name])).to be_nil
       end
 
       it 'returns the json error for group' do
@@ -157,7 +156,7 @@ RSpec.describe 'Group API' do
     end
 
     it 'removes the group from the database' do
-      expect{ Group.find(group.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { Group.find(group.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

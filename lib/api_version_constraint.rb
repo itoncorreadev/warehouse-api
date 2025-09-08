@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApiVersionConstraint
   def initialize(options)
     @version = options[:version]

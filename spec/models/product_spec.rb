@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
@@ -5,7 +7,7 @@ RSpec.describe Product, type: :model do
 
   context 'When is new' do
     it { expect(product).not_to be_product_type }
-    it { expect(product).to be_status}
+    it { expect(product).to be_status }
   end
 
   it { is_expected.to belong_to(:group) }

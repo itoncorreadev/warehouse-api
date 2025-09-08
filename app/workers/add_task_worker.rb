@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTaskWorker
   require 'csv'
 
@@ -7,7 +9,7 @@ class AddTaskWorker
   def perform(csv_file)
     sleep 8
     CSV.foreach(csv_file, headers: true) do |task|
-    Task.create(title: task[0], user_id: 1)
+      Task.create(title: task[0], user_id: 1)
     end
   end
 end

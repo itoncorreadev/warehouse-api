@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Accept' => 'application/vnd.warehouse.v2',
@@ -17,7 +19,6 @@ RSpec.describe 'Users API', type: :request do
   end
 
   describe 'GET /auth/validate_token' do
-
     context 'when the request headers are valid' do
       before do
         get '/auth/validate_token', params: {}, headers: headers
@@ -76,7 +77,7 @@ RSpec.describe 'Users API', type: :request do
 
   describe 'PUT /auth' do
     before do
-      put "/auth", params: user_params.to_json, headers: headers
+      put '/auth', params: user_params.to_json, headers: headers
     end
 
     context 'when the request params are valid' do
@@ -106,7 +107,7 @@ RSpec.describe 'Users API', type: :request do
 
   describe 'DELETE /auth' do
     before do
-      delete "/auth", params: {}, headers: headers
+      delete '/auth', params: {}, headers: headers
     end
 
     it 'returns status code 200' do

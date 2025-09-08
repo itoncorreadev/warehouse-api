@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Department API' do
   before { host! 'api.warehouse.test' }
 
   let!(:user) { create(:user) }
-  let!(:auth_data) {  user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Content-Type' => Mime[:json].to_s,
@@ -17,7 +19,6 @@ RSpec.describe 'Department API' do
   end
 
   describe 'GET /departments' do
-
     context 'when no filter param is sent' do
       before do
         create_list(:department, 5)
@@ -34,10 +35,8 @@ RSpec.describe 'Department API' do
     end
 
     context 'when filter and sorting params is sent' do
-      let!(:department_1) { create(:department, description: 'Personal Department') }
-      let!(:department_2) { create(:department, description: 'Kitchen') }
-      let!(:department_3) { create(:department, description: 'Administrative') }
-      let!(:department_4) { create(:department, description: 'Information Technology') }
+      let!(:department_one) { create(:department, description: 'Personal Department') }
+      let!(:department_two) { create(:department, description: 'Kitchen') }
 
       before do
         get '/departments?q[description_cont]=en&q[s]=description+ASC', params: {}, headers: headers
@@ -46,7 +45,7 @@ RSpec.describe 'Department API' do
       it 'returns only the departments matching and in the correct order' do
         returned_department_description = json_body[:data].map { |t| t[:attributes][:description] }
 
-        expect(returned_department_description).to eq([department_2.description, department_1.description])
+        expect(returned_department_description).to eq([department_two.description, department_one.description])
       end
     end
   end

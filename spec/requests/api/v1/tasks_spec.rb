@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Task API' do
@@ -28,7 +30,7 @@ RSpec.describe 'Task API' do
   end
 
   describe 'GET /tasks/:id' do
-    let(:task) { create(:task, user_id: user.id)}
+    let(:task) { create(:task, user_id: user.id) }
 
     before { get "/tasks/#{task.id}", params: {}, headers: headers }
 
@@ -54,7 +56,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'retuns the task in database' do
-        expect( Task.find_by(title: task_params[:title]) ).not_to be_nil
+        expect(Task.find_by(title: task_params[:title])).not_to be_nil
       end
 
       it 'retuns the json for created task' do
@@ -74,7 +76,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'does not save the task in the database' do
-        expect( Task.find_by(title: task_params[:title]) ).to be_nil
+        expect(Task.find_by(title: task_params[:title])).to be_nil
       end
 
       it 'returns the json error for title' do
@@ -102,7 +104,7 @@ RSpec.describe 'Task API' do
       end
 
       it 'updates the task in the database' do
-        expect( Task.find_by(title: task_params[:title]) ).not_to be_nil
+        expect(Task.find_by(title: task_params[:title])).not_to be_nil
       end
     end
 
@@ -118,11 +120,9 @@ RSpec.describe 'Task API' do
       end
 
       it 'does not update the task in the database' do
-        expect( Task.find_by(title: task_params[:title])).to be_nil
+        expect(Task.find_by(title: task_params[:title])).to be_nil
       end
-
     end
-
   end
 
   describe 'DELETE /tasks/:id' do
