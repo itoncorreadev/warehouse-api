@@ -1,0 +1,754 @@
+---
+openapi: 3.0.1
+info:
+  title: API V2
+  version: v2
+paths:
+  "/categories":
+    get:
+      summary: Retrieves all categories
+      tags:
+      - Categories
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: access_token
+        in: header
+        schema:
+          type: string
+      - name: client
+        in: header
+        schema:
+          type: string
+      - name: uid
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: categories found
+        '401':
+          description: unauthorized
+    post:
+      summary: Creates a category
+      tags:
+      - Categories
+      parameters: []
+      responses:
+        '201':
+          description: category created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: boolean
+              required:
+              - description
+  "/categories/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a category
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: category found
+    put:
+      summary: Updates a category
+      tags:
+      - Categories
+      parameters: []
+      responses:
+        '200':
+          description: category updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a category
+      tags:
+      - Categories
+      responses:
+        '204':
+          description: category deleted
+  "/departments":
+    get:
+      summary: Retrieves all departments
+      tags:
+      - Departments
+      responses:
+        '200':
+          description: departments found
+    post:
+      summary: Creates a department
+      tags:
+      - Departments
+      parameters: []
+      responses:
+        '201':
+          description: department created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: boolean
+              required:
+              - description
+  "/departments/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a department
+      tags:
+      - Departments
+      responses:
+        '200':
+          description: department found
+    put:
+      summary: Updates a department
+      tags:
+      - Departments
+      parameters: []
+      responses:
+        '200':
+          description: department updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a department
+      tags:
+      - Departments
+      responses:
+        '204':
+          description: department deleted
+  "/requests/{request_id}/details":
+    parameters:
+    - name: request_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves all details for a request
+      tags:
+      - Details
+      responses:
+        '200':
+          description: details found
+    post:
+      summary: Creates a detail for a request
+      tags:
+      - Details
+      parameters: []
+      responses:
+        '201':
+          description: detail created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                unit_price:
+                  type: number
+                total_price:
+                  type: number
+                observation:
+                  type: string
+                product_id:
+                  type: integer
+              required:
+              - quantity
+              - product_id
+  "/requests/{request_id}/details/{id}":
+    parameters:
+    - name: request_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a detail
+      tags:
+      - Details
+      responses:
+        '200':
+          description: detail found
+    put:
+      summary: Updates a detail
+      tags:
+      - Details
+      parameters: []
+      responses:
+        '200':
+          description: detail updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+    delete:
+      summary: Deletes a detail
+      tags:
+      - Details
+      responses:
+        '204':
+          description: detail deleted
+  "/groups":
+    get:
+      summary: Retrieves all groups
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: groups found
+    post:
+      summary: Creates a group
+      tags:
+      - Groups
+      parameters: []
+      responses:
+        '201':
+          description: group created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: boolean
+              required:
+              - name
+  "/groups/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a group
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: group found
+    put:
+      summary: Updates a group
+      tags:
+      - Groups
+      parameters: []
+      responses:
+        '200':
+          description: group updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a group
+      tags:
+      - Groups
+      responses:
+        '204':
+          description: group deleted
+  "/products":
+    get:
+      summary: Retrieves all products
+      tags:
+      - Products
+      responses:
+        '200':
+          description: products found
+    post:
+      summary: Creates a product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '201':
+          description: product created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                code:
+                  type: string
+                product_type:
+                  type: boolean
+                measure:
+                  type: string
+                min:
+                  type: integer
+                med:
+                  type: integer
+                max:
+                  type: integer
+                location:
+                  type: string
+                status:
+                  type: boolean
+                group_id:
+                  type: integer
+                category_id:
+                  type: integer
+              required:
+              - name
+              - group_id
+              - category_id
+  "/products/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a product
+      tags:
+      - Products
+      responses:
+        '200':
+          description: product found
+    put:
+      summary: Updates a product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '200':
+          description: product updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a product
+      tags:
+      - Products
+      responses:
+        '204':
+          description: product deleted
+  "/requests":
+    get:
+      summary: Retrieves all requests
+      tags:
+      - Requests
+      responses:
+        '200':
+          description: requests found
+    post:
+      summary: Creates a request
+      tags:
+      - Requests
+      parameters: []
+      responses:
+        '201':
+          description: request created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request_type:
+                  type: string
+                description:
+                  type: string
+                document_type:
+                  type: string
+                document_code:
+                  type: string
+                status:
+                  type: boolean
+                product_id:
+                  type: integer
+                department_id:
+                  type: integer
+                supplier_id:
+                  type: integer
+                user_id:
+                  type: integer
+              required:
+              - product_id
+              - department_id
+              - user_id
+  "/requests/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a request
+      tags:
+      - Requests
+      responses:
+        '200':
+          description: request found
+    put:
+      summary: Updates a request
+      tags:
+      - Requests
+      parameters: []
+      responses:
+        '200':
+          description: request updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a request
+      tags:
+      - Requests
+      responses:
+        '204':
+          description: request deleted
+  "/sessions":
+    post:
+      summary: User login
+      tags:
+      - Sessions
+      parameters: []
+      responses:
+        '201':
+          description: session created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+    delete:
+      summary: User logout
+      tags:
+      - Sessions
+      responses:
+        '204':
+          description: session destroyed
+  "/suppliers":
+    get:
+      summary: Retrieves all suppliers
+      tags:
+      - Suppliers
+      responses:
+        '200':
+          description: suppliers found
+    post:
+      summary: Creates a supplier
+      tags:
+      - Suppliers
+      parameters: []
+      responses:
+        '201':
+          description: supplier created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                type_document:
+                  type: string
+                document:
+                  type: string
+                address:
+                  type: string
+                phone:
+                  type: string
+                comment:
+                  type: string
+                status:
+                  type: boolean
+              required:
+              - description
+  "/suppliers/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a supplier
+      tags:
+      - Suppliers
+      responses:
+        '200':
+          description: supplier found
+    put:
+      summary: Updates a supplier
+      tags:
+      - Suppliers
+      parameters: []
+      responses:
+        '200':
+          description: supplier updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: boolean
+    delete:
+      summary: Deletes a supplier
+      tags:
+      - Suppliers
+      responses:
+        '204':
+          description: supplier deleted
+  "/tasks":
+    get:
+      summary: Retrieves all tasks
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: tasks found
+    post:
+      summary: Creates a task
+      tags:
+      - Tasks
+      parameters: []
+      responses:
+        '201':
+          description: task created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - title
+  "/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a task
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: task found
+    put:
+      summary: Updates a task
+      tags:
+      - Tasks
+      parameters: []
+      responses:
+        '200':
+          description: task updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                done:
+                  type: boolean
+    delete:
+      summary: Deletes a task
+      tags:
+      - Tasks
+      responses:
+        '204':
+          description: task deleted
+  "/users":
+    get:
+      summary: Retrieves all users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: users found
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+  "/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: user found
+    put:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: user updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: user deleted
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: access-token
+      in: header
+    client:
+      type: apiKey
+      name: client
+      in: header
+    uid:
+      type: apiKey
+      name: uid
+      in: header
+security:
+- tokenAuth: []
+  client: []
+  uid: []

@@ -1,0 +1,200 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/sessions":
+    post:
+      summary: User login
+      tags:
+      - Sessions
+      parameters: []
+      responses:
+        '201':
+          description: session created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+    delete:
+      summary: User logout
+      tags:
+      - Sessions
+      responses:
+        '204':
+          description: session destroyed
+  "/tasks":
+    get:
+      summary: Retrieves all tasks
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: tasks found
+    post:
+      summary: Creates a task
+      tags:
+      - Tasks
+      parameters: []
+      responses:
+        '201':
+          description: task created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - title
+  "/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a task
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: task found
+    put:
+      summary: Updates a task
+      tags:
+      - Tasks
+      parameters: []
+      responses:
+        '200':
+          description: task updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                done:
+                  type: boolean
+    delete:
+      summary: Deletes a task
+      tags:
+      - Tasks
+      responses:
+        '204':
+          description: task deleted
+  "/users":
+    get:
+      summary: Retrieves all users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: users found
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+  "/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: user found
+    put:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: user updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: user deleted
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: access-token
+      in: header
+    client:
+      type: apiKey
+      name: client
+      in: header
+    uid:
+      type: apiKey
+      name: uid
+      in: header
+security:
+- tokenAuth: []
+  client: []
+  uid: []
